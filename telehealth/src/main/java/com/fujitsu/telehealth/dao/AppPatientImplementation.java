@@ -190,14 +190,18 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
+			
+			String parts[] = requestInfo.getTh_doctor().split(" ", 2);
+			
 			stmt = con.prepareStatement(SQL_REQUEST_APPOINTMENT);
-			stmt.setString(1, requestInfo.getTh_doctor());
+			stmt.setString(1, String.format("%s", parts[1]));
 			stmt.setString(2, requestInfo.getTh_patient_name());
 			stmt.setString(3, requestInfo.getTh_date());
 			stmt.setString(4, requestInfo.getTh_time());
 			stmt.setString(5, "Pending");
 			stmt.setString(6, requestInfo.getTh_comment());
 			stmt.setString(7, requestInfo.getTh_uid());
+			stmt.setString(8, String.format("%s", parts[0]));
 			int rs = stmt.executeUpdate();
 			result = rs > 0;
 		} catch (SQLException ex) {

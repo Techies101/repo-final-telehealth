@@ -95,6 +95,9 @@ public class WebServiceController extends HttpServlet {
 			case "/list":
 				PatientController.listPatient(request, response);
 				break;
+			case "/listdoc":
+				PatientController.listDoctor(request, response);
+				break;
 			case "/select":
 				PatientController.detailsPatient(request, response);
 				break;

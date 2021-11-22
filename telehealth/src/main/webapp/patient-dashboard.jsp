@@ -135,7 +135,6 @@ table td{
 						<input type="button" onclick="location.href='payment.jsp';" class="btn btn-primary" value= "Pay"> 
 					 	<button id="view${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-eye"></i> View</button>					 	
 			            <button id="upload${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
-						<button id="cancel${a.meetingNumber}" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>			
 				       <!-- <form action="uploadImage" method="post" enctype="multipart/form-data">
 				        
 			              <input type="file" name="image" required="required"/><br/><br/>
@@ -143,6 +142,7 @@ table td{
 			            <input type="submit"/>
 			        	</form>-->
 						</c:if>
+						<button id="cancel${a.meetingNumber}" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>			
 									<script>
         	
 									var a = document.getElementById('upload'+${a.meetingNumber});
@@ -271,7 +271,7 @@ table td{
 	</table>
 	
 	<div class="d-flex">
-		<button onclick="location.href='appointment'"  class="btn btn-primary mt-4 "><i class="fa fa-calendar-plus"></i> Request Appointment</button>
+		<button onclick="location.href='listdoc'"  class="btn btn-primary mt-4 "><i class="fa fa-calendar-plus"></i> Request Appointment</button>
 	</div>
 </div>
 
