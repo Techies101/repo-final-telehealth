@@ -44,7 +44,6 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				// os.write(byteArray);
 				// os.flush();
 				// os.close();
-
 				// Part image = rs.getInt("th_id");
 
 				meeting.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks, number,
