@@ -29,4 +29,5 @@ public interface AppPatientInterface {
 	
 	List<AppointmentModel> selectLaboratory(String th_uid) throws SQLException;
 	
+	
 }
