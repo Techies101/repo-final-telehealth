@@ -103,7 +103,7 @@ public class PatientController {
 		}
 
 	}
-
+	
 	// Create new User
 	public void createNewUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
@@ -290,7 +290,6 @@ public class PatientController {
 		imageDao2.labImage(uid, part);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
 		dispatcher.forward(request, response);
-		// response.sendRedirect("/TelehealthService/patient-list.jsp");
 	}
 
 }
