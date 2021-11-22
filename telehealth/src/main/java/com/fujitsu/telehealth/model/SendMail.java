@@ -1,4 +1,4 @@
-package com.fujitsu.telehealth.dao;
+package com.fujitsu.telehealth.model;
 
 import java.util.Properties;
 
