@@ -283,9 +283,4 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return tbl_appointment;
 	}
 
-	@Override
-	public boolean emailVerification() throws SQLException {
-		return false;
-	}
-
 }
