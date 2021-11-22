@@ -1,0 +1,41 @@
+/*
+===============================
+SHOWCASE STYLE
+===============================
+*/
+
+/*
+===============================
+Appointment Request Style
+===============================
+*/
+.custom_btn-background-blue {
+	background-color: #1c87c9 !important;
+	color: #fff !important;
+	font-weight: 600 !important;
+}
+
+h6.form_text {
+	color: #1c87c9 !important;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif !important;
+}
+
+.form_name {
+	font-weight: 700 !important;
+}
+
+.form_appointment {
+	margin: 0 auto;
+}
+
+.card_wrapper {
+	max-width: 30rem;
+	margin: 0 auto;
+}
+
+form-control:disabled, .form-control[readonly] {
+	background-color: #fff !important;
+}
