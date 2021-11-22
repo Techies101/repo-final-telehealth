@@ -136,7 +136,8 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				String th_contact = rs.getString("th_contact");
 				String th_fullname = rs.getString("th_fullname");
 				String th_uid = rs.getString("th_uid");
-				tbl_patient.add(new PatientModel(th_patientid, th_email, th_contact, th_fullname, th_uid));
+				String th_role = rs.getString("th_role");
+				tbl_patient.add(new PatientModel(th_patientid, th_email, th_contact, th_fullname, th_uid, th_role));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -28,7 +28,17 @@ public class PatientModel {
 		this.th_fullname = th_fullname;
 		this.th_uid = th_uid;
 	}
-
+	
+	public PatientModel(String th_patientID, String th_email, String th_contact, String th_fullname, String th_uid, String th_role) {
+		super();
+		this.th_patientID = th_patientID;
+		this.th_email = th_email;
+		this.th_contact = th_contact;
+		this.th_fullname = th_fullname;
+		this.th_uid = th_uid;
+		this.role = th_role;
+	}
+	
 	public PatientModel(String th_email, String th_fullname, String th_uid, String th_role) {
 		super();
 		this.th_email = th_email;

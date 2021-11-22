@@ -178,7 +178,7 @@ public class PatientController {
 		String date = request.getParameter("date");
 		String time = request.getParameter("time");
 		String condition = request.getParameter("condition");
-
+		
 		AppRequestByPatient appRequest = new AppRequestByPatient(doctor, fullname, date, time, condition, uid);
 
 		if (AppPatientImpl.requestAppointment(appRequest)) {
@@ -231,6 +231,15 @@ public class PatientController {
 		dispatcher("patient-dashboard.jsp", request, response);
 	}
 
+	// List of Doctors for Request Appointment
+	public void listDoctor(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
+		request.setAttribute("listPatient", listPatient);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
+		dispatcher.forward(request, response);
+	}
+	
 	// List of Patient
 	public void listPatient(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
