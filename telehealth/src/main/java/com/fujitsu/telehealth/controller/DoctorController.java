@@ -8,6 +8,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fujitsu.telehealth.dao.AppDoctorImplementation;
 import com.fujitsu.telehealth.model.AppointmentModel2;
@@ -31,7 +32,12 @@ public class DoctorController {
 			selected = "All";
 		}
 		List<AppointmentModel2> meeting = null;
-		meeting = appDao.displayMeeting();
+		
+		HttpSession session = request.getSession();
+		String uid = null;
+		uid = (String) session.getAttribute("uid");
+		
+		meeting = appDao.displayMeeting(uid);
 		request.setAttribute("meeting", meeting);
 		request.setAttribute("dropdown", selected);
 
@@ -80,5 +86,5 @@ public class DoctorController {
 		dispatcher("doctor-dashboard.jsp", request, response);
 //		response.sendRedirect("/TelehealthService/display.jsp");
 	}
-
+ // Hello World!
 }

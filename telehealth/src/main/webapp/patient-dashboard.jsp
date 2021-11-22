@@ -26,6 +26,10 @@
     	font-family: 'Montserrat' !important;
     	margin-left: .5rem;
 }
+.btn-danger{
+    	font-family: 'Montserrat' !important;
+    	margin-left: .5rem;
+}
 
 table td{
 	font-family: 'Montserrat', sans-serif !important;
@@ -107,16 +111,31 @@ table td{
 						<td><c:out value="${a.meetingDoctor}" /></td>
 						<td><c:out value="${a.meetingDate}" /></td>
 						<td><c:out value="${a.meetingTime}" /></td>
-						<td style="align-items: center;"><c:out value="${a.meetingStatus}" /></td>
+
+						<c:choose>
+						<c:when test="${a.meetingStatus == 'Payment' && a.meetingImage != null}">
+						<td style="align-items: center; font-size: 85%;"><c:out value="Payed"/><br><c:out value="(Wait Doctor's Approval)"/><br>
+						</td>
+						</c:when>
+						
+						<c:when test="${a.meetingStatus == 'Payment' && a.meetingImage == null}">
+						<td style="align-items: center;"><c:out value="For Payment"/></td>
+						</c:when>
+						
+						<c:otherwise>
+						<td style="align-items: center;"><c:out value="${a.meetingStatus}"/></td>
+						</c:otherwise>						
+						</c:choose>
 						
 						<c:choose>
 						<c:when test="${a.meetingStatus == 'Pending' || a.meetingStatus == 'Payment'}">
 						<td class="d-flex flex-end">
-							<button id="cancel${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-times"></i> Cancel</button>
 						<c:if test="${a.meetingStatus == 'Payment'}">
+						
 						<input type="button" onclick="location.href='payment.jsp';" class="btn btn-primary" value= "Pay"> 
 					 	<button id="view${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-eye"></i> View</button>					 	
 			            <button id="upload${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+						<button id="cancel${a.meetingNumber}" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>			
 				       <!-- <form action="uploadImage" method="post" enctype="multipart/form-data">
 				        
 			              <input type="file" name="image" required="required"/><br/><br/>
@@ -151,7 +170,7 @@ table td{
         		    })
         		  }
         		  reader.readAsDataURL(file)
-        		}
+
         	    var formData = new FormData();
     			
     			formData.append("imageId", ${a.meetingNumber});
@@ -161,8 +180,8 @@ table td{
 					body: formData
     			})
     			location.reload()
+    		}
         		})()
-        		
 
         	});
 			}

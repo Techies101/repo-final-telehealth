@@ -19,13 +19,15 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 
 	// Display Request
 	@Override
-	public List<AppointmentModel2> displayMeeting() throws SQLException {
+	public List<AppointmentModel2> displayMeeting(String th_uid) throws SQLException {
 		List<AppointmentModel2> meeting = new ArrayList<>();
 		Connection con = null;
 		try {
 			con = DBConnection.connect();
 			PreparedStatement preparedStatement;
 			preparedStatement = con.prepareStatement(SQL_SELECT_APPOINTMENT);
+			preparedStatement.setString(1, th_uid);
+
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
 				String doctor = rs.getString("th_doctor");
@@ -44,7 +46,6 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				// os.write(byteArray);
 				// os.flush();
 				// os.close();
-
 				// Part image = rs.getInt("th_id");
 
 				meeting.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks, number,
