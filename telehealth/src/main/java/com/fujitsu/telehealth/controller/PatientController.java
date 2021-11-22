@@ -291,7 +291,6 @@ public class PatientController {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
 		dispatcher.forward(request, response);
 		// response.sendRedirect("/TelehealthService/patient-list.jsp");
-
 	}
 
 }
