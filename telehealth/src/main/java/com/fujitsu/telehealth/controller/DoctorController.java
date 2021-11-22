@@ -86,5 +86,6 @@ public class DoctorController {
 		dispatcher("doctor-dashboard.jsp", request, response);
 //		response.sendRedirect("/TelehealthService/display.jsp");
 	}
- // Hello World!
+	// HELLO WORLD
+  // Hello World!
 }
