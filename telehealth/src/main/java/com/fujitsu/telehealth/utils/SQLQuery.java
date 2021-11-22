@@ -16,6 +16,7 @@ public class SQLQuery {
 	public static final String SQL_REQUEST_APPOINTMENT = "INSERT INTO tbl_appointment(th_doctor, th_patient, th_date, th_time, th_status, th_comment, th_uid) VALUES(?, ?, ?, ?, ?, ?, ?)";
 	public static final String SELECT_ALL_APPOINTMENT_BY_PATIENT = "SELECT th_doctor, th_patient, th_date, th_time, th_status, th_link, th_comment, th_remarks, th_id, th_image FROM tbl_appointment WHERE th_uid=?";
 	public static final String SQL_UPLOAD_PROOF_PAYMENT = "UPDATE uIOZfQ2T0j.tbl_appointment set th_image=? where th_id= ?";
+	public static final String SQL_AGE = "select cast(DATEDIFF(curdate(),th_bday) / 365.25 AS UNSIGNED) AS age from tbl_patient where th_id= ?";
 
 	// DOCTOR SIDE QUERY
 	public static final String SQL_SELECT_APPOINTMENT = "SELECT * FROM tbl_appointment";

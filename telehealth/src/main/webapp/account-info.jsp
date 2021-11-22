@@ -48,6 +48,9 @@
 						</div>
 
 						<div class="item">
+							<label for="bday">Birthday</label> <input type="text"
+								value="<c:out value='${myinfo.th_bday}' />" class="form-control"
+								name=th_bday>
 							<label for="age">Age</label> <input type="text"
 								value="<c:out value='${myinfo.th_age}' />" class="form-control"
 								name=th_age>
