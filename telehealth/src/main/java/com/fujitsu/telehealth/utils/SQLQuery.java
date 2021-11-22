@@ -18,7 +18,7 @@ public class SQLQuery {
 	public static final String SQL_UPLOAD_PROOF_PAYMENT = "UPDATE uIOZfQ2T0j.tbl_appointment set th_image=? where th_id= ?";
 
 	// DOCTOR SIDE QUERY
-	public static final String SQL_SELECT_APPOINTMENT = "SELECT * FROM tbl_appointment";
+	public static final String SQL_SELECT_APPOINTMENT = "SELECT * FROM tbl_appointment WHERE th_did=?";
 	public static final String SQL_UPDATE_LINK = "UPDATE tbl_appointment SET th_link=? WHERE th_id= ?";
 	public static final String SQL_DROP_MEETING = "UPDATE tbl_appointment SET th_status='Declined', th_comment=? WHERE th_id=?";
 	public static final String SQL_PENDING_STATUS = "UPDATE tbl_appointment set th_status='Payment' where th_id=?";

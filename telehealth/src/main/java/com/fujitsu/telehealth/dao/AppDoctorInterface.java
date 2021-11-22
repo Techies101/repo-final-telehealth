@@ -10,7 +10,7 @@ import com.fujitsu.telehealth.model.PatientModel;
 
 public interface AppDoctorInterface {
 
-	public List<AppointmentModel2> displayMeeting() throws SQLException;
+	public List<AppointmentModel2> displayMeeting(String uid) throws SQLException;
 
 	public boolean updateMeeting(int id, String link) throws SQLException;
 
