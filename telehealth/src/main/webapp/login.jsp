@@ -29,6 +29,8 @@
 	}
 	%>
 	
+	<h1><c:out value="${valid}"></c:out></h1>
+	
 	<div class="container contact pt-5 pb-5 mt-5 ">
 		<div class="loginForm  center mt-5">
 

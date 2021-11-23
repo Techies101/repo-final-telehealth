@@ -1,5 +1,4 @@
 package com.fujitsu.telehealth.dao;
-
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -216,14 +215,18 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
+			
+			String parts[] = requestInfo.getTh_doctor().split(" ", 2);
+			
 			stmt = con.prepareStatement(SQL_REQUEST_APPOINTMENT);
-			stmt.setString(1, requestInfo.getTh_doctor());
+			stmt.setString(1, String.format("%s", parts[1]));
 			stmt.setString(2, requestInfo.getTh_patient_name());
 			stmt.setString(3, requestInfo.getTh_date());
 			stmt.setString(4, requestInfo.getTh_time());
 			stmt.setString(5, "Pending");
 			stmt.setString(6, requestInfo.getTh_comment());
 			stmt.setString(7, requestInfo.getTh_uid());
+			stmt.setString(8, String.format("%s", parts[0]));
 			int rs = stmt.executeUpdate();
 			result = rs > 0;
 		} catch (SQLException ex) {
@@ -256,13 +259,13 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String remarks = rs.getString("th_remarks");
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
+				
 				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
 				// response.setContentType("image/gif");
 				// OutputStream os = r.getOutputStream();
 				// os.write(byteArray);
 				// os.flush();
 				// os.close();
-
 				// Part image = rs.getInt("th_id");
 
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
@@ -309,9 +312,20 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return tbl_appointment;
 	}
 
-	@Override
-	public boolean emailVerification() throws SQLException {
-		// TODO Auto-generated method stub
+	public boolean updateUserStatus(String email) throws SQLException {
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement stmt = con.prepareStatement(SQL_UPDATE_STATUS);
+			stmt.setString(1, "True");
+			stmt.setString(2, email);
+			int rs = stmt.executeUpdate();
+			return rs > 0;
+		}catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		}finally {
+			con.close();
+		}
 		return false;
 	}
 

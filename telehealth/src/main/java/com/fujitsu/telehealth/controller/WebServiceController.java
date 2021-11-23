@@ -76,6 +76,8 @@ public class WebServiceController extends HttpServlet {
 			case "/payment":
 				PatientController.dispatcher("payment.jsp", request, response);
 				break;
+			case "/verify":
+				PatientController.verifyToken(request, response);
 				
 			// GET METHOD DOCTOR
 			case "/doctor-dashboard":
@@ -94,6 +96,9 @@ public class WebServiceController extends HttpServlet {
 				break;
 			case "/list":
 				PatientController.listPatient(request, response);
+				break;
+			case "/listdoc":
+				PatientController.listDoctor(request, response);
 				break;
 			case "/select":
 				PatientController.detailsPatient(request, response);

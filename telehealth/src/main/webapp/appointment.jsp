@@ -39,8 +39,15 @@ type="text/css">
 			<form class="form_appointment" action="book-appointment" id="form-appointment">
 				<div class="input-group mb-3">
 					<select name="doctor" class="form-select" id="inputGroupSelect01" required>
+					
 						<option selected disabled>Find Doctor</option>
-						<option value="Dr. Angeline Sebastian">Dr. Angeline Sebastian</option>
+											    
+					    <c:forEach items="${listPatient}" var="a">
+					    		<c:if test="${a.role == 'doctor'}">
+					            <option value="${a.th_uid} ${a.th_fullname}">Dr. ${a.th_fullname}</option>
+					    		</c:if>
+					        
+					    </c:forEach>					
 					</select>
 				</div>
 				
