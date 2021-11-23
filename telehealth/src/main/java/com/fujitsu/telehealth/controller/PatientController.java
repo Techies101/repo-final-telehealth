@@ -223,14 +223,9 @@ public class PatientController {
 		String th_contact = request.getParameter("th_contact").replace(" ", "");
 		String th_password = request.getParameter("th_password");
 		String th_condition = request.getParameter("th_condition");
-<<<<<<< HEAD
 		String th_bday = request.getParameter("th_bday");
 		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,th_age,
 				th_gender, th_contact, th_password, th_condition, th_bday);
-=======
-		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,
-				th_age, th_gender, th_contact, th_password, th_condition);
->>>>>>> refs/heads/master
 
 		if (AppPatientImpl.updateAccount(userInfo)) {
 			responseText(response, "success");
