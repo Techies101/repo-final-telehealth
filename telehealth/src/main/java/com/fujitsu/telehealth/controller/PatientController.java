@@ -348,10 +348,6 @@ public class PatientController {
 	// Consultation History of Patient
 	public void patientConsultation(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		
-		HttpSession session = request.getSession();
-		String uid = (String) session.getAttribute("uid");
-		
 		List<AppointmentModel> patientConsultation = AppDoctorImpl.selectConsultation(request.getParameter("id"));
 		request.setAttribute("patientConsultation", patientConsultation);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-consultation-history.jsp");
