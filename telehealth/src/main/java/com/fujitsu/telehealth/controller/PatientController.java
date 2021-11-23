@@ -24,7 +24,6 @@ import com.fujitsu.telehealth.dao.ImageListDAO;
 import com.fujitsu.telehealth.model.AppRequestByPatient;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
-import com.fujitsu.telehealth.model.HtmlTemplate;
 import com.fujitsu.telehealth.model.LabModel;
 import com.fujitsu.telehealth.model.LoginModel;
 import com.fujitsu.telehealth.model.PatientModel;
@@ -37,7 +36,6 @@ public class PatientController {
 	ImageDAO imageDao = new ImageDAO();
 	Image2DAO imageDao2 = new Image2DAO();
 	ImageListDAO imageListDao = new ImageListDAO();
-	HtmlTemplate template = new HtmlTemplate();
 	SendMail mail = new SendMail();
 
 	// Page Dispatcher
@@ -145,9 +143,9 @@ public class PatientController {
 			String token = createToken().replace("=", "");
 			session.setAttribute("verificationToken", token);
 			session.setAttribute("email", userInfo.getTh_email());
-			template.setHtmlContent(token, userInfo.getTh_fname() + " " + userInfo.getTh_lname());
-			mail.setUserEmail(userInfo.getTh_email());
-			mail.sendEmail(template.getHtmlContent(), "onlinetelehealthservices@gmail.com", "Fujitsu2021!");
+//			template.setHtmlContent(token, userInfo.getTh_fname() + " " + userInfo.getTh_lname());
+//			mail.setUserEmail(userInfo.getTh_email());
+//			mail.sendEmail(template.getHtmlContent(), "onlinetelehealthservices@gmail.com", "Fujitsu2021!");
 			responseText(response, "success");
 		} else {
 			responseText(response, "error");
