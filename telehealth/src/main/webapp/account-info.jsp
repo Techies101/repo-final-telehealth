@@ -47,13 +47,13 @@
 								<input type="hidden" name="id" value="<c:out value='${patient.th_uid}' />" />
 								</c:if>
 							</div>
-							<div class="col-md-6">
+							<!--<div class="col-md-6">
 								<label class="labels">Patient ID</label>
 								<input type="text"
 								value="<c:out value='${patient.patient_uid}' />" 
 								class="form-control"
 								name=patient_uid required="required" >
-							</div>
+							</div>-->
 							<div class="col-md-6">
 								<label class="labels">Fisrtname</label>
 								<input
@@ -84,8 +84,14 @@
 								type="text" value="<c:out value='${myinfo.th_gender}' />"
 								class="form-control" name=th_gender>
 							</div>
-						</div>
-						<div class="row mt-3">
+							<div class="col-md-6">
+								<label class="labels">Birthday</label>
+								<input
+								type="text" value="test"
+								class="form-control" name=th_bday>
+							</div>
+						
+						
 							<div class="col-md-6">
 								<label class="labels">Address</label>
 								<input
