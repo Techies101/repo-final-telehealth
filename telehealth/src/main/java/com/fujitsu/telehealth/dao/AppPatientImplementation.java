@@ -59,7 +59,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String th_fullname = rs.getString("th_fullname");
 				String th_uid = rs.getString("th_uid");
 				String th_role = rs.getString("th_role");
-				String th_password = rs.getString("th_password");
 				userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
 			}
 		} catch (SQLException ex) {
