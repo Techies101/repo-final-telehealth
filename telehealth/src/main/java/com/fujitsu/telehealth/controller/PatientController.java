@@ -2,10 +2,10 @@ package com.fujitsu.telehealth.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
 import java.security.SecureRandom;
+import java.sql.SQLException;
 import java.util.Base64;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,6 +28,7 @@ import com.fujitsu.telehealth.model.LabModel;
 import com.fujitsu.telehealth.model.LoginModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.model.SendMail;
+import com.fujitsu.telehealth.model.HtmlTemplate;
 
 public class PatientController {
 
@@ -37,6 +38,7 @@ public class PatientController {
 	Image2DAO imageDao2 = new Image2DAO();
 	ImageListDAO imageListDao = new ImageListDAO();
 	SendMail mail = new SendMail();
+	HtmlTemplate template = new HtmlTemplate();
 
 	// Page Dispatcher
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
@@ -143,9 +145,9 @@ public class PatientController {
 			String token = createToken().replace("=", "");
 			session.setAttribute("verificationToken", token);
 			session.setAttribute("email", userInfo.getTh_email());
-//			template.setHtmlContent(token, userInfo.getTh_fname() + " " + userInfo.getTh_lname());
-//			mail.setUserEmail(userInfo.getTh_email());
-//			mail.sendEmail(template.getHtmlContent(), "onlinetelehealthservices@gmail.com", "Fujitsu2021!");
+			template.setHtmlContent(token, userInfo.getTh_fname() + " " + userInfo.getTh_lname());
+			mail.setUserEmail(userInfo.getTh_email());
+			mail.sendEmail(template.getHtmlContent(), "onlinetelehealthservices@gmail.com", "Fujitsu2021!");
 			responseText(response, "success");
 		} else {
 			responseText(response, "error");
