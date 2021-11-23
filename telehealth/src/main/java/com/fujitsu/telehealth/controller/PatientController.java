@@ -24,11 +24,11 @@ import com.fujitsu.telehealth.dao.ImageListDAO;
 import com.fujitsu.telehealth.model.AppRequestByPatient;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
+import com.fujitsu.telehealth.model.HtmlTemplate;
 import com.fujitsu.telehealth.model.LabModel;
 import com.fujitsu.telehealth.model.LoginModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.model.SendMail;
-import com.fujitsu.telehealth.model.HtmlTemplate;
 
 public class PatientController {
 
@@ -37,8 +37,8 @@ public class PatientController {
 	ImageDAO imageDao = new ImageDAO();
 	Image2DAO imageDao2 = new Image2DAO();
 	ImageListDAO imageListDao = new ImageListDAO();
-	SendMail mail = new SendMail();
 	HtmlTemplate template = new HtmlTemplate();
+	SendMail mail = new SendMail();
 
 	// Page Dispatcher
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
