@@ -65,7 +65,7 @@ public class WebServiceController extends HttpServlet {
 				PatientController.listRequest(request, response);
 				break;
 			case "/appointment":
-				PatientController.dispatcher("appointment.jsp", request, response);
+				PatientController.patientDashboard(request, response);
 				break;
 			case "/register":
 				PatientController.dispatcher("register.jsp", request, response);

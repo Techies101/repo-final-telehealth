@@ -27,20 +27,29 @@ public class DoctorController {
 	// Display Meeting
 	public void displayMeeting(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		HttpSession session = request.getSession();
 		String selected = request.getParameter("dropdown");
+		String uid = (String) session.getAttribute("uid");
+		String role = (String) session.getAttribute("role");
+		
+		if (uid == null)  {
+			response.sendRedirect("login");
+			return;
+		}
+			
+		if (role.equals("patient")) {
+			response.sendRedirect("patient-dashboard");
+			return;
+		}
+		
 		if(selected == null) {
 			selected = "All";
 		}
+		
 		List<AppointmentModel2> meeting = null;
-		
-		HttpSession session = request.getSession();
-		String uid = null;
-		uid = (String) session.getAttribute("uid");
-		
 		meeting = appDao.displayMeeting(uid);
 		request.setAttribute("meeting", meeting);
 		request.setAttribute("dropdown", selected);
-
 		// SEND DATA BACK TO JSP
 		dispatcher("doctor-dashboard.jsp", request, response);
 	}

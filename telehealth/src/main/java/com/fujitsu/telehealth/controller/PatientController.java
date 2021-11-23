@@ -85,15 +85,15 @@ public class PatientController {
 	// User login
 	public void userLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-
+		
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
 		String th_email = request.getParameter("th_email").trim();
 		String th_password = request.getParameter("th_password").trim();
 		LoginModel user = new LoginModel(th_email, th_password);
 		PatientModel userInfo = AppPatientImpl.validate(user);
-		HttpSession session = request.getSession();
-		String uid = null;
-		uid = (String) session.getAttribute("uid");
-
+		
+		
 		if (userInfo != null) {
 			if (uid == null) {
 				session.setAttribute("email", userInfo.getTh_email());
@@ -162,18 +162,45 @@ public class PatientController {
 		if (userToken.equals(verificationToken)) {
 			if (AppPatientImpl.updateUserStatus(userEmail)) {
 				session.setAttribute("valid", "true");
-			} else {
-				session.setAttribute("valid", "false");
+				session.invalidate();
 			}
 		} else {
 			System.out.println("Invalid Token");
 		}
+	}
+	
+	public void patientDashboard(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException, SQLException{
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		String role = (String) session.getAttribute("role");
+		
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		if (role.equals("doctor")) {
+			response.sendRedirect("doctor-dashboard.jsp");
+			return;
+		}
+		
+		List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
+		request.setAttribute("listPatient", listPatient);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	// Get Profile Info
 	public void accountInfo(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
 		String email = (String) session.getAttribute("email");
 		PatientModel userInfo = AppPatientImpl.getUserInfo(email);
 		request.setAttribute("myinfo", userInfo);
@@ -235,7 +262,12 @@ public class PatientController {
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
 		String selected = request.getParameter("dropdown");
-
+		
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
 		if (selected == null) {
 			selected = "All";
 		}
@@ -281,15 +313,31 @@ public class PatientController {
 	// List of Patient
 	public void listPatient(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
-		request.setAttribute("listPatient", listPatient);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}else {
+			List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
+			request.setAttribute("listPatient", listPatient);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	// Details of Patient
 	public void detailsPatient(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
 		PatientModel detailsPatient = AppDoctorImpl.selectPatient(request.getParameter("id"));
 		request.setAttribute("detailsPatient", detailsPatient);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-details.jsp");
@@ -299,6 +347,10 @@ public class PatientController {
 	// Consultation History of Patient
 	public void patientConsultation(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
+		
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		
 		List<AppointmentModel> patientConsultation = AppDoctorImpl.selectConsultation(request.getParameter("id"));
 		request.setAttribute("patientConsultation", patientConsultation);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-consultation-history.jsp");
@@ -322,6 +374,12 @@ public class PatientController {
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
+		
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		
 		List<LabModel> patientLab = AppDoctorImpl.labImageList(uid);
 		request.setAttribute("patientLab", patientLab);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-history.jsp");
