@@ -88,6 +88,7 @@ public class PatientController {
 
 		String th_email = request.getParameter("th_email").trim();
 		String th_password = request.getParameter("th_password").trim();
+		System.out.println(th_password);
 		LoginModel user = new LoginModel(th_email, th_password);
 		PatientModel userInfo = AppPatientImpl.validate(user);
 		HttpSession session = request.getSession();
@@ -338,5 +339,4 @@ public class PatientController {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
 		dispatcher.forward(request, response);
 	}
-
 }
