@@ -48,13 +48,10 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
 			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(),88);
-			System.out.println(userCredentials.getTh_password().equals(encryptedPassword));
 			stmt.setString(1, userCredentials.getTh_email());
 			stmt.setString(2, encryptedPassword);
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
-			System.out.println(encryptedPassword);
-			System.out.println(userCredentials.getTh_password());
 			if (result) {
 				String th_email = rs.getString("th_email");
 				String th_fullname = rs.getString("th_fullname");
@@ -92,6 +89,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(9, encryptedPassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
+			stmt.setString(12, userInfo.getTh_bday());
 			int num = stmt.executeUpdate();
 			result = num > 0;
 		} catch (SQLException ex) {
@@ -260,14 +258,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
 				
-				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
-				// response.setContentType("image/gif");
-				// OutputStream os = r.getOutputStream();
-				// os.write(byteArray);
-				// os.flush();
-				// os.close();
-				// Part image = rs.getInt("th_id");
-
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
 						number, blob));
 			}

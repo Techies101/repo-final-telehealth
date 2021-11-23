@@ -138,6 +138,7 @@ public class PatientController {
 		String th_address = request.getParameter("th_address");
 		String th_patientID = new PatientModel().getTh_patientID() + Integer.parseInt(generateUniqueID());
 		String th_bday = request.getParameter("th_bday");
+		
 		PatientModel userInfo = new PatientModel(th_patientID, th_email, th_first_name, th_middle_name, th_last_name,
 				th_address, th_age, th_gender, th_contact, th_password, th_condition,th_bday);
 
