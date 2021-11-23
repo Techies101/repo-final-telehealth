@@ -70,7 +70,7 @@ public class PatientController {
 		String email = request.getParameter("email");
 		if (AppPatientImpl.checkUserExist(email)) {
 			responseText(response, "error");
-		}else {
+		} else {
 			responseText(response, "success");
 		}
 	}
@@ -81,6 +81,7 @@ public class PatientController {
 
 		String th_email = request.getParameter("th_email").trim();
 		String th_password = request.getParameter("th_password").trim();
+		System.out.println(th_password);
 		LoginModel user = new LoginModel(th_email, th_password);
 		PatientModel userInfo = AppPatientImpl.validate(user);
 		HttpSession session = request.getSession();
@@ -156,8 +157,8 @@ public class PatientController {
 		String th_contact = request.getParameter("th_contact").replace(" ", "");
 		String th_password = request.getParameter("th_password");
 		String th_condition = request.getParameter("th_condition");
-		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address, th_age,
-				th_gender, th_contact, th_password, th_condition);
+		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,
+				th_age, th_gender, th_contact, th_password, th_condition);
 
 		if (AppPatientImpl.updateAccount(userInfo)) {
 			responseText(response, "success");
@@ -192,12 +193,12 @@ public class PatientController {
 	// List Request
 	public void listRequest(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
 		String selected = request.getParameter("dropdown");
-		
-		if(selected == null) {
+
+		if (selected == null) {
 			selected = "All";
 		}
 
@@ -262,7 +263,7 @@ public class PatientController {
 	public void patientLaboratory(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
-		String th_uid = (String)session.getAttribute("uid");
+		String th_uid = (String) session.getAttribute("uid");
 		List<LabModel> patientLaboratory = imageListDao.labImageList(th_uid);
 		request.setAttribute("patientLaboratory", patientLaboratory);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-laboratory-history.jsp");
@@ -293,5 +294,4 @@ public class PatientController {
 		// response.sendRedirect("/TelehealthService/patient-list.jsp");
 
 	}
-
 }

@@ -7,7 +7,7 @@ public class SQLQuery {
 			+ "													th_address, th_age, th_gender, th_contact,"
 			+ "													th_password, th_condition, th_uid)"
 			+ "										 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	public static final String SQL_SELECT_USER = "SELECT * FROM tbl_patient WHERE th_email=? AND th_password=?";
+	public static final String SQL_SELECT_USER = "SELECT * FROM tbl_patient WHERE th_email=? AND th_password=? AND th_activated='True'";
 	public static final String SQL_SELECT_USER_BY_EMAIL = "SELECT * FROM tbl_patient WHERE th_email=?";
 	public static final String SQL_FIND_BY_EMAIL = "SELECT th_email FROM tbl_patient WHERE th_email=?";
 	public static final String SQL_SEND_MESSAGE_FROM_GUEST = "INSERT INTO uIOZfQ2T0j.tbl_contactus (th_fullname, th_email, th_message) VALUES (?,?,?)";
