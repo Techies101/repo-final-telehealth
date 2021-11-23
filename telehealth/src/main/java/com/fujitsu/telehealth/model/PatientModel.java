@@ -17,19 +17,9 @@ public class PatientModel {
 	private String th_uid;
 	private String th_bday;
 	private String role;
+	private String code;
 
 	public PatientModel() {}
-	
-	
-	public String getRole() {
-		return role;
-	}
-
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 
 	public PatientModel(String th_patientID, String th_email, String th_contact, String th_fullname, String th_uid) {
 		super();
@@ -39,9 +29,17 @@ public class PatientModel {
 		this.th_fullname = th_fullname;
 		this.th_uid = th_uid;
 	}
-
-
-
+	
+	public PatientModel(String th_patientID, String th_email, String th_contact, String th_fullname, String th_uid, String th_role) {
+		super();
+		this.th_patientID = th_patientID;
+		this.th_email = th_email;
+		this.th_contact = th_contact;
+		this.th_fullname = th_fullname;
+		this.th_uid = th_uid;
+		this.role = th_role;
+	}
+	
 	public PatientModel(String th_email, String th_fullname, String th_uid, String th_role) {
 		super();
 		this.th_email = th_email;
@@ -49,9 +47,6 @@ public class PatientModel {
 		this.th_uid = th_uid;
 		this.role = th_role;
 	}
-	
-	
-	
 	
 	public PatientModel(String th_email, String th_fname, String th_middle_name, String th_lname, String th_address,
 			String th_age, String th_gender, String th_contact, String th_condition, String th_uid,String th_bday) {
@@ -105,6 +100,25 @@ public class PatientModel {
 		this.th_password = th_password;
 		this.th_condition = th_condition;
 		this.th_bday = th_bday;
+	}
+	
+	
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	public String getTh_uid() {

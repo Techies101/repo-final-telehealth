@@ -8,6 +8,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fujitsu.telehealth.dao.AppDoctorImplementation;
 import com.fujitsu.telehealth.model.AppointmentModel2;
@@ -26,18 +27,31 @@ public class DoctorController {
 	// Display Meeting
 	public void displayMeeting(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		HttpSession session = request.getSession();
 		String selected = request.getParameter("dropdown");
+		String uid = (String) session.getAttribute("uid");
+		String role = (String) session.getAttribute("role");
+		
+		if (uid == null)  {
+			response.sendRedirect("login");
+			return;
+		}
+			
+		if (role.equals("patient")) {
+			response.sendRedirect("patient-dashboard");
+			return;
+		}
+		
 		if(selected == null) {
 			selected = "All";
 		}
+		
 		List<AppointmentModel2> meeting = null;
-		meeting = appDao.displayMeeting();
+		meeting = appDao.displayMeeting(uid);
 		request.setAttribute("meeting", meeting);
 		request.setAttribute("dropdown", selected);
-
 		// SEND DATA BACK TO JSP
 		dispatcher("doctor-dashboard.jsp", request, response);
-		// response.sendRedirect("_patientappointment.jsp");
 	}
 
 	// Update Meeting Link
@@ -78,7 +92,5 @@ public class DoctorController {
 		String type = request.getParameter("approvetype");
 		appDao.approveMeeting(id, type);
 		dispatcher("doctor-dashboard.jsp", request, response);
-//		response.sendRedirect("/TelehealthService/display.jsp");
 	}
-
 }

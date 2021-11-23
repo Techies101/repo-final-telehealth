@@ -24,7 +24,10 @@
     	font-family: 'Montserrat' !important;
     	margin-left: .5rem;
 }
-
+.btn-danger{
+    	font-family: 'Montserrat' !important;
+    	margin-left: .5rem;
+}
 table td{
 	font-family: 'Montserrat', sans-serif !important;
 	
@@ -54,16 +57,6 @@ height: 100vh !important;
 </head>
 <body>
 
-	<%
-	String uid = (String) session.getAttribute("uid");
-	String role = (String) session.getAttribute("role");
-		if (uid == null) 
-			response.sendRedirect("login");
-		
-		if (role.equals("patient")) 
-			response.sendRedirect("patient-dashboard.jsp");
-	%>
-	
 	<%@include file="includes/_header.jsp"%>
 	<div class="container-search ">
 		<form action="doctor-dashboard" class="py-3 d-flex" method="post">
@@ -104,25 +97,31 @@ height: 100vh !important;
 						<td><c:out value="${a.meetingPatient}" /></td>
 						<td><c:out value="${a.meetingDate}" /></td>
 						<td><c:out value="${a.meetingTime}" /></td>
-						<td style="align-items: center;"><c:out value="${a.meetingStatus}" /></td>
 						
 						<c:choose>
+						<c:when test="${a.meetingStatus == 'Payment' && a.meetingImage != null}">
+						<td style="align-items: center;"><c:out value="Payed"/></td>
+						</c:when>
 						
+						<c:when test="${a.meetingStatus == 'Payment' && a.meetingImage == null}">
+						<td style="align-items: center;"><c:out value="For Payment"/></td>
+						</c:when>
+						
+						<c:otherwise>
+						<td style="align-items: center;"><c:out value="${a.meetingStatus}"/></td>
+						</c:otherwise>						
+						</c:choose>
+												
+						<c:choose>
 						<c:when test="${a.meetingStatus == 'Pending' || a.meetingStatus == 'Payment'}">
 						<td>
-							<button id="cancel${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-times"></i> Cancel</button>
 							<button id="approve${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-check"></i> Approve</button>
 									
 						<c:if test="${a.meetingStatus == 'Payment'}">
 						
 					 	<button id="view${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-eye"></i> View</button>					 	
-				       <!-- <form action="uploadImage" method="post" enctype="multipart/form-data">
-				        
-			             <input type="file" name="image" required="required"/><br/><br/>
-			            <input type="hidden" name="imageId" value ="${a.meetingNumber}" required="required"/><br/><br/>
-			            <input type="submit"/>
-			        	</form>-->
 						</c:if>
+						<button id="cancel${a.meetingNumber}" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
 									
 									
 <script>

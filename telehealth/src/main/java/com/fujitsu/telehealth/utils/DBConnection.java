@@ -10,6 +10,7 @@ public class DBConnection {
 	private static String dbUname = "uIOZfQ2T0j";
 	private static String dbPass = "6y2fJmK9ND";
 	private static String dbDriver = "com.mysql.cj.jdbc.Driver";
+	
 
 	public static Connection connect() {
 		Connection conn = null;

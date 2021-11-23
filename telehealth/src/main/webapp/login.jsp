@@ -22,13 +22,7 @@
 <link rel="stylesheet" href="assets/stylesheet/register.css">
 </head>
 <body>
-	<%
-	String uid = (String) session.getAttribute("uid");
-	if (uid != null) {
-		response.sendRedirect("patient-dashboard");
-	}
-	%>
-	
+
 	<div class="container contact pt-5 pb-5 mt-5 ">
 		<div class="loginForm  center mt-5">
 
