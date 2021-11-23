@@ -1,5 +1,4 @@
 package com.fujitsu.telehealth.dao;
-
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +16,7 @@ import com.fujitsu.telehealth.utils.DBConnection;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
-
+	
 	// Validate User
 	@Override
 	public PatientModel validate(LoginModel userCredentials) throws SQLException {
@@ -234,13 +233,13 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String remarks = rs.getString("th_remarks");
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
+				
 				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
 				// response.setContentType("image/gif");
 				// OutputStream os = r.getOutputStream();
 				// os.write(byteArray);
 				// os.flush();
 				// os.close();
-
 				// Part image = rs.getInt("th_id");
 
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
@@ -285,6 +284,24 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con.close();
 		}
 		return tbl_appointment;
+	}
+
+	@Override
+	public boolean updateUserStatus(String email) throws SQLException {
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement stmt = con.prepareStatement(SQL_UPDATE_STATUS);
+			stmt.setString(1, "True");
+			stmt.setString(2, email);
+			int rs = stmt.executeUpdate();
+			return rs > 0;
+		}catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		}finally {
+			con.close();
+		}
+		return false;
 	}
 
 }

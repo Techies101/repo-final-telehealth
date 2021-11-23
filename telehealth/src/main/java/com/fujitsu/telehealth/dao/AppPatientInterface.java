@@ -29,5 +29,5 @@ public interface AppPatientInterface {
 	
 	List<AppointmentModel> selectLaboratory(String th_uid) throws SQLException;
 	
-	
+	boolean updateUserStatus(String th_email) throws SQLException;
 }
