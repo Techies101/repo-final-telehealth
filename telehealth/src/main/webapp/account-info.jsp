@@ -16,12 +16,13 @@
 	<%@include file="includes/_header.jsp"%>
 	<!-- EDITTABLE FORM FOR ACCOUNT DETAILS UPDATE -->
 
-	<%
-	String uid = (String) session.getAttribute("uid");
-	if (uid == null) {
-		response.sendRedirect("login");
-	}
-	%>
+	<div class="account-center">
+		<div class="testbox">
+			<form action="update" id="update-form" class="border my-info">
+				<fieldset>
+					<legend class="rounded-3">Update Details</legend>
+					<div class="colums">
+
 
 	<div class="container rounded bg-white mt-3 mb-5  ">
 		<div class="container updateform">
