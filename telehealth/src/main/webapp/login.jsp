@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 <%@include file="includes/_linkshead.jsp"%>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
@@ -46,8 +46,8 @@
 				</div>
 				<div class="inputBox">
 					<input type="password" id="password" name="th_password"
-						required="required"> <span>Password </span><i
-						class="material-icons" id="visibility"> visibility </i>
+						required="required"> <span>Password </span>
+						<i class="material-icons" id="visibility"> visibility </i>
 				</div>
 				<div class="inputBox">
 					<div class="col-auto">
@@ -60,9 +60,8 @@
 			</form>
 		</div>
 	</div>
-
-	<script
-		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="./assets/js/modal.js"></script>
 	<script>

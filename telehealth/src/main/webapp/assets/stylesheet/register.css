@@ -1,5 +1,5 @@
 body {
-	background-image: url("../../img/design.png") !important;
+	background-image: url("../../img/dg2.jpg") !important;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -64,19 +64,18 @@ p.error-text {
 	margin: 0 auto;
 }
 
-.regForm h2 {
+.loginForm h2 , .regForm h2 {
 	font-size: 30px;
 	color: #333;
 	font-weight: 500;
 }
 
-.regForm .inputBox {
+.loginForm .inputBox, .regForm .inputBox {
 	position: relative;
 	margin-top: 10px;
 }
 
-
-.regForm .inputBox select {
+.loginForm .inputBox select, .regForm .inputBox select {
 	width: 100%;
 	line-height: 100%;
 	outline: none;
@@ -86,6 +85,7 @@ p.error-text {
 	margin-top: 7px;
 }
 
+.loginForm .inputBox input, .loginForm .inputBox textarea,
 .regForm .inputBox input, .regForm .inputBox textarea {
 	width: 100%;
 	padding: 5px 0;
@@ -96,7 +96,7 @@ p.error-text {
 	outline: none;
 	resize: none;
 }
-
+.loginForm .inputBox span,
 .regForm .inputBox span {
 	position: absolute;
 	left: 20px;
