@@ -136,10 +136,11 @@ public class PatientController {
 		String th_password = request.getParameter("th_password").trim();
 		String th_condition = request.getParameter("th_condition");
 		String th_address = request.getParameter("th_address");
-
 		String th_patientID = new PatientModel().getTh_patientID() + Integer.parseInt(generateUniqueID());
+		String th_bday = request.getParameter("th_bday");
+		
 		PatientModel userInfo = new PatientModel(th_patientID, th_email, th_first_name, th_middle_name, th_last_name,
-				th_address, th_age, th_gender, th_contact, th_password, th_condition);
+				th_address, th_age, th_gender, th_contact, th_password, th_condition,th_bday);
 
 		if (AppPatientImpl.createNewUser(userInfo)) {
 			String token = createToken().replace("=", "");
@@ -223,8 +224,9 @@ public class PatientController {
 		String th_contact = request.getParameter("th_contact").replace(" ", "");
 		String th_password = request.getParameter("th_password");
 		String th_condition = request.getParameter("th_condition");
-		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,
-				th_age, th_gender, th_contact, th_password, th_condition);
+		String th_bday = request.getParameter("th_bday");
+		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,th_age,
+				th_gender, th_contact, th_password, th_condition, th_bday);
 
 		if (AppPatientImpl.updateAccount(userInfo)) {
 			responseText(response, "success");
