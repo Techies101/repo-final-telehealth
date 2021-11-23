@@ -16,7 +16,27 @@ import com.fujitsu.telehealth.utils.DBConnection;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
-	
+
+	public static String getEncryptedValue(String value, int secret_key) {
+		String encrypt = "";
+		for (int i = 0; i < value.length(); i++) {
+			char ch = value.charAt(i);
+			ch += secret_key;
+			encrypt = encrypt + ch;
+		}
+		return encrypt;
+	}
+
+	public static String getDecryptedValue(String encrypt, int secret_key) {
+		String decrypted = "";
+		for (int i = 0; i < encrypt.length(); i++) {
+			char ch = encrypt.charAt(i);
+			ch -= secret_key;
+			decrypted = decrypted + ch;
+		}
+		return decrypted;
+	}
+
 	// Validate User
 	@Override
 	public PatientModel validate(LoginModel userCredentials) throws SQLException {
@@ -26,15 +46,20 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
+			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(),88);
+			System.out.println(userCredentials.getTh_password().equals(encryptedPassword));
 			stmt.setString(1, userCredentials.getTh_email());
-			stmt.setString(2, userCredentials.getTh_password());
+			stmt.setString(2, encryptedPassword);
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
+			System.out.println(encryptedPassword);
+			System.out.println(userCredentials.getTh_password());
 			if (result) {
 				String th_email = rs.getString("th_email");
 				String th_fullname = rs.getString("th_fullname");
 				String th_uid = rs.getString("th_uid");
 				String th_role = rs.getString("th_role");
+				String th_password = rs.getString("th_password");
 				userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
 			}
 		} catch (SQLException ex) {
@@ -51,6 +76,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 	public boolean createNewUser(PatientModel userInfo) throws SQLException {
 		boolean result = false;
 		Connection con = null;
+		String encryptedPassword = getEncryptedValue(userInfo.getTh_password(), 88);
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
@@ -63,7 +89,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(6, userInfo.getTh_age());
 			stmt.setString(7, userInfo.getTh_gender());
 			stmt.setString(8, userInfo.getTh_contact());
-			stmt.setString(9, userInfo.getTh_password());
+			stmt.setString(9, encryptedPassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
 			int num = stmt.executeUpdate();
@@ -286,7 +312,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return tbl_appointment;
 	}
 
-	@Override
 	public boolean updateUserStatus(String email) throws SQLException {
 		Connection con = null;
 		try {
