@@ -1,3 +1,4 @@
+
 package com.fujitsu.telehealth.dao;
 
 import java.sql.Blob;
@@ -5,79 +6,71 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fujitsu.telehealth.model.AppRequestByPatient;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
 import com.fujitsu.telehealth.model.LoginModel;
-import com.fujitsu.telehealth.model.NotificationModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.utils.DBConnection;
-import com.fujitsu.telehealth.utils.NotifBackgroundTask;
 import com.fujitsu.telehealth.utils.SQLQuery;
+import com.fujitsu.telehealth.utils.Encryption.Encrypt;
 
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
 
-	public static String getEncryptedValue(String value, int secret_key) {
-		String encrypt = "";
-		for (int i = 0; i < value.length(); i++) {
-			char ch = value.charAt(i);
-			ch += secret_key;
-			encrypt = encrypt + ch;
-		}
-		return encrypt;
-	}
-
-	public static String getDecryptedValue(String encrypt, int secret_key) {
-		String decrypted = "";
-		for (int i = 0; i < encrypt.length(); i++) {
-			char ch = encrypt.charAt(i);
-			ch -= secret_key;
-			decrypted = decrypted + ch;
-		}
-		return decrypted;
-	}
-
-	// Validate User
+// Validate User
 	@Override
 	public PatientModel validate(LoginModel userCredentials) throws SQLException {
 		PatientModel userInfo = null;
 		Connection con = null;
 		try {
+			Boolean status = false;
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
-			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(), 88);
 			stmt.setString(1, userCredentials.getTh_email());
-			stmt.setString(2, encryptedPassword);
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
+
+			System.out.println(result);
+
 			if (result) {
+
+				System.out.println(rs.getString("th_password"));
+				String saltvalue = rs.getString("th_salt");
+				System.out.println(saltvalue);
+				status = Encrypt.verifyUserPassword(userCredentials.getTh_password(), rs.getString("th_password"),
+						saltvalue);
+				if (status) {
+					String th_email = rs.getString("th_email");
+					String th_fullname = rs.getString("th_fullname");
+					String th_uid = rs.getString("th_uid");
+					String th_role = rs.getString("th_role");
+					userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
+				}
 				String th_email = rs.getString("th_email");
 				String th_fullname = rs.getString("th_fullname");
 				String th_uid = rs.getString("th_uid");
 				String th_role = rs.getString("th_role");
 				userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
+
 			}
 		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);
 		} finally {
 			con.close();
 		}
-
 		return userInfo;
 	}
 
-	// Insert new user
+// Insert new user
 	@Override
 	public boolean createNewUser(PatientModel userInfo) throws SQLException {
 		boolean result = false;
 		Connection con = null;
-		String encryptedPassword = getEncryptedValue(userInfo.getTh_password(), 88);
+		String saltvalue = Encrypt.getSaltvalue(30);
+		String encryptedpassword = Encrypt.generateSecurePassword(userInfo.getTh_password(), saltvalue);
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
@@ -90,10 +83,12 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(6, userInfo.getTh_age());
 			stmt.setString(7, userInfo.getTh_gender());
 			stmt.setString(8, userInfo.getTh_contact());
-			stmt.setString(9, encryptedPassword);
+			stmt.setString(9, encryptedpassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
-			stmt.setString(12, userInfo.getTh_bday());
+			stmt.setString(12, saltvalue);
+			stmt.setString(13, userInfo.getTh_bday());
+
 			int num = stmt.executeUpdate();
 			result = num > 0;
 		} catch (SQLException ex) {
@@ -104,7 +99,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return result;
 	}
 
-	// Check User exist
+// Check User exist
 	@Override
 	public boolean checkUserExist(String email) throws SQLException {
 		Connection con = null;
@@ -124,7 +119,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return res;
 	}
 
-	// Get User info
+// Get User info
 	@Override
 	public PatientModel getUserInfo(String email) throws SQLException {
 		PatientModel userInfo = null;
@@ -148,9 +143,8 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String th_condition = rs.getString("th_condition");
 				String th_fullname = rs.getString("th_fullname");
 				String th_uid = rs.getString("th_uid");
-				String th_bday = rs.getString("th_bday");
 				userInfo = new PatientModel(th_email, th_fname, th_middle_name, th_lname, th_address, th_age, th_gender,
-						th_contact, th_password, th_condition, th_fullname, th_uid, th_bday);
+						th_contact, th_password, th_condition, th_fullname, th_uid);
 			}
 		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);
@@ -161,7 +155,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return userInfo;
 	}
 
-	// Send Message
+// Send Message
 	@Override
 	public boolean sendMessage(String fullname, String email, String message) throws SQLException {
 		boolean success = false;
@@ -181,7 +175,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return success;
 	}
 
-	// Update Account
+// Update Account
 	public boolean updateAccount(PatientModel patient) throws SQLException {
 		boolean result = false;
 		Connection con = null;
@@ -199,8 +193,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(8, patient.getTh_contact());
 			stmt.setString(9, patient.getTh_password());
 			stmt.setString(10, patient.getTh_condition());
-			stmt.setString(11, patient.getTh_bday());
-			stmt.setString(12, patient.getTh_patientID());
+			stmt.setString(11, patient.getTh_patientID());
 			int num = stmt.executeUpdate();
 			result = num > 0;
 		} catch (SQLException ex) {
@@ -264,6 +257,14 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
 
+				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
+				// response.setContentType("image/gif");
+				// OutputStream os = r.getOutputStream();
+				// os.write(byteArray);
+				// os.flush();
+				// os.close();
+				// Part image = rs.getInt("th_id");
+
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
 						number, blob));
 			}
@@ -297,7 +298,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String th_remarks = rs.getString("th_remarks");
 				int th_id = rs.getInt("th_id");
 				Blob th_image = rs.getBlob("th_image");
-
 				tbl_appointment.add(new AppointmentModel(th_doctor, th_patient, th_date, th_time, th_status, th_link,
 						th_comment, th_remarks, th_id, th_uid, th_image));
 			}
@@ -326,34 +326,5 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return false;
 	}
 
-
-	public NotificationModel getSchedule(String th_did) throws SQLException, ParseException {
-		Connection con = null;
-		try {
-			con = DBConnection.connect();
-			PreparedStatement stmt = con.prepareStatement(SLECT_APPOINTMENT_BY_DOCTOR);
-			stmt.setString(1, th_did);
-			ResultSet rs = stmt.executeQuery();
-			boolean resultQuery = rs.next();
-			if (resultQuery) {
-				String appointment_date = rs.getString("th_date");
-				String appointment_time = rs.getString("th_time");
-				String doctor = rs.getString("th_doctor");
-				String message = "Hi Dr. " + doctor + "!, " + "You have schedule later at " + appointment_time + " please be reminded.";
-				boolean checkNotif = NotifBackgroundTask.getTimeDiff(appointment_time, appointment_date);
-				if (checkNotif) {
-					return new NotificationModel(appointment_time, appointment_date, message, doctor);
-				}
-			}
-		}catch(SQLException sqlex) {
-			DBConnection.printSQLException(sqlex); 
-		} catch(ParseException pe) {
-			pe.printStackTrace();
-		}finally {
-			con.close();
-		}
-		
-		return null;
-		
-	}
 }
+
