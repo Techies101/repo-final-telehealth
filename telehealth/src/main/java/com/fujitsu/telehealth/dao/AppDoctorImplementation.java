@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import com.fujitsu.telehealth.model.LabModel;
 import com.fujitsu.telehealth.model.NotificationModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.utils.DBConnection;
+import com.fujitsu.telehealth.utils.NotifBackgroundTask;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterface {
@@ -237,7 +239,7 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 	}
 
 	@Override
-	public NotificationModel getSchedule(String th_did) throws SQLException {
+	public NotificationModel getSchedule(String th_did) throws SQLException, ParseException {
 		
 		Connection con = null;
 		
@@ -248,7 +250,10 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 			ResultSet rs = stmt.executeQuery();
 			
 			if (rs.next()) {
-				
+				String appointment_time = rs.getString("th_time");
+				String appointment_date = rs.getString("th_date");
+				String doctor = rs.getString("th_doctor");
+				System.out.println(NotifBackgroundTask.getTimeDiff(appointment_time, appointment_date));
 			}
 			
 		}catch (SQLException sqlex) {

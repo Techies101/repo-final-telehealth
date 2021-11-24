@@ -1,6 +1,7 @@
 package com.fujitsu.telehealth.dao;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import com.fujitsu.telehealth.model.AppointmentModel;
@@ -27,6 +28,6 @@ public interface AppDoctorInterface {
 
 	List<LabModel> labImageList(String uid) throws SQLException;
 
-	NotificationModel getSchedule(String th_did) throws SQLException;
+	NotificationModel getSchedule(String th_did) throws SQLException, ParseException;
 
 }
