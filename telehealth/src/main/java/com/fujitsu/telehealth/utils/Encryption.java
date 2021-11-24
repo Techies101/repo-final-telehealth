@@ -60,11 +60,8 @@ public class Encryption {
 		// method to verify if both password matches or not
 		public static boolean verifyUserPassword(String providedPassword, String securedPassword, String salt) {
 			boolean finalval = false;
-
 			// generate new secure password with the same salt
 			String newSecurePassword = generateSecurePassword(providedPassword, salt);  
-	          
-
 			// check if two passwords are equal
 			finalval = newSecurePassword.equalsIgnoreCase(securedPassword);  
 	          
