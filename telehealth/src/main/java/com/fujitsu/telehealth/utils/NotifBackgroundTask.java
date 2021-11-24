@@ -28,7 +28,7 @@ public class NotifBackgroundTask  {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
+		
 		long diff = d2.getTime() - d1.getTime();
 		long actDiff = TimeUnit.MILLISECONDS.toHours(diff);
 
