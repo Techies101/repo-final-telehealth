@@ -22,7 +22,7 @@ public class DoctorController {
 
 	private AppDoctorImplementation appDao = new AppDoctorImplementation();
 
-	// Page Dispatcher
+	// Page Dispatchera
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(page);

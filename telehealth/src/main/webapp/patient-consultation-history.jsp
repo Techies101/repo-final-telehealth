@@ -14,7 +14,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/stylesheet/header.css">
 <link rel="stylesheet" href="assets/stylesheet/dashboard.css">
-	
+
 }
 
 #appointment th {
@@ -66,7 +66,6 @@
 			</table>
 		</div>
 	</div>
-
 	<script src="assets/js/modal.js"></script>
 </body>
 </html>

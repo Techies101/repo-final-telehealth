@@ -77,7 +77,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(11, userInfo.getTh_patientID());
 			stmt.setString(12, saltvalue);
 			stmt.setString(13, userInfo.getTh_bday());
-
 			int num = stmt.executeUpdate();
 			result = num > 0;
 		} catch (SQLException ex) {
@@ -247,14 +246,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String remarks = rs.getString("th_remarks");
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
-
-				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
-				// response.setContentType("image/gif");
-				// OutputStream os = r.getOutputStream();
-				// os.write(byteArray);
-				// os.flush();
-				// os.close();
-				// Part image = rs.getInt("th_id");
 
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
 						number, blob));
