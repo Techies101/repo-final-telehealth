@@ -240,9 +240,7 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 
 	@Override
 	public NotificationModel getSchedule(String th_did) throws SQLException, ParseException {
-		
 		Connection con = null;
-		
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt = con.prepareStatement(SELECT_SCHEDULE_BY_DOCTOR);
