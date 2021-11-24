@@ -5,14 +5,16 @@ public class SQLQuery {
 	public static final String SQL_CREATE_NEW_USER = "INSERT INTO "
 			+ "										tbl_patient(th_email, th_fname, th_middle_name, th_lname, "
 			+ "													th_address, th_age, th_gender, th_contact,"
-
 			+ "													th_password, th_condition, th_uid, th_salt, th_bday)"
 			+ "										 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 	public static final String SQL_SELECT_USER = "SELECT * FROM tbl_patient WHERE th_email=? AND th_activated='True'";
 	public static final String SQL_SELECT_USER_BY_EMAIL = "SELECT * FROM tbl_patient WHERE th_email=?";
 	public static final String SQL_FIND_BY_EMAIL = "SELECT th_email FROM tbl_patient WHERE th_email=?";
 	public static final String SQL_SEND_MESSAGE_FROM_GUEST = "INSERT INTO uIOZfQ2T0j.tbl_contactus (th_fullname, th_email, th_message) VALUES (?,?,?)";
+
+	public static final String SQL_UPDATE_ACCOUNT_SQL = "UPDATE uIOZfQ2T0j.tbl_patient SET th_email=?, th_fname=?, th_middle_name=?, th_lname=?, th_address=?, th_age=?, th_gender=?, th_contact=?, th_password=?, th_condition=?,th_bday=? WHERE th_uid=?";
 	public static final String SQL_UPDATE_ACCOUNT_SQL = "UPDATE uIOZfQ2T0j.tbl_patient SET th_email=?, th_fname=?, th_middle_name=?, th_lname=?, th_address=?, th_age=?, th_gender=?, th_contact=?, th_password=?, th_condition=?, th_bday=? WHERE th_uid=?";
+
 
 	public static final String SQL_REQUEST_APPOINTMENT = "INSERT INTO tbl_appointment(th_doctor, th_patient, th_date, th_time, th_status, th_comment, th_uid, th_did) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	public static final String SELECT_ALL_APPOINTMENT_BY_PATIENT = "SELECT th_doctor, th_patient, th_date, th_time, th_status, th_link, th_comment, th_remarks, th_id, th_image FROM tbl_appointment WHERE th_uid=?";

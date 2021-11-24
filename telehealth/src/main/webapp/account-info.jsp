@@ -80,7 +80,7 @@
 							<div class="col-md-6">
 								<label class="labels">Birthday</label>
 								<input
-								type="text" value="test"
+								type="text" value="<c:out value='${myinfo.th_bday}' />"
 								class="form-control" name=th_bday>
 							</div>
 						

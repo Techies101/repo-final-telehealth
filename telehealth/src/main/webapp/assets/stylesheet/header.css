@@ -25,17 +25,19 @@ Nav Style
 	font-size: 3rem !important;
 }
 
-.btn-login {
-	border-width: 3px !important;
-	border-radius: 20px !important;
-	border-color: #1c87c9 !important;
-	font-weight: 600 !important;
-}
-
-.btn-login:hover {
-	background-color: #1c87c9;
-	color: white !important;
-}
+.btn-login{
+    border-width: 3px;
+    border-radius: 20px;
+    border-color: #1c87c9;
+    padding-left: 20px;
+    padding-right:20px;
+    font-weight: 600;
+  }
+  .btn-login:hover{
+    background-color:#1c87c9 ;
+    color: white;
+   
+  }
 
 div.navigation {
 	background-color: #fdfdfdea;
