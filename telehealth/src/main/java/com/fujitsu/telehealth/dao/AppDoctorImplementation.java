@@ -247,6 +247,10 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 			stmt.setString(1, th_did);
 			ResultSet rs = stmt.executeQuery();
 			
+			if (rs.next()) {
+				
+			}
+			
 		}catch (SQLException sqlex) {
 			DBConnection.printSQLException(sqlex);
 		}
