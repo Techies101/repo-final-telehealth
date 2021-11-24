@@ -19,7 +19,7 @@
 <body>	
 	<%@include file="includes/_header.jsp" %>
 		
-		<div class="container container-search col-lg-7">
+		<div class="container col-lg-8">
 			<div class="row">
 				<div class="col py-3" align="left">
 					<h5 class="text-left">My Laboratory History</h5>

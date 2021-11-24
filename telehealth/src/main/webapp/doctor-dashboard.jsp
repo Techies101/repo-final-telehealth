@@ -19,7 +19,7 @@
 
 	<%@include file="includes/_header.jsp"%>
 	
-	<div class="container col-lg-7 mt-3 ">
+	<div class="container col-lg-8 mt-3 ">
 		<form action="patient-dashboard" class="py-3 right" method="post">
 			<div class="row ">
 				<select name="dropdown" id="list" class="form-select mt-1 ml-1 col">
@@ -46,7 +46,7 @@
 	</div>
 
 
-	<div class="container container-search col-md-12">
+	<div class="container col-lg-8">
 		<div class="table-responsive w-100 ">
 			<table id="appointment" class="table table-hover">
 				<thead>
