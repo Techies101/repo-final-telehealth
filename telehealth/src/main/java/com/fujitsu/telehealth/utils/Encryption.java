@@ -12,10 +12,6 @@ import javax.crypto.spec.PBEKeySpec;
 
 public class Encryption {
 
-	
-		
-		
-	
 	public static class Encrypt {
 
 		public static final Random random = new SecureRandom();
@@ -62,14 +58,12 @@ public class Encryption {
 			boolean finalval = false;
 
 			// generate new secure password with the same salt
-			String newSecurePassword = generateSecurePassword(providedPassword, salt);  
-	          
+			String newSecurePassword = generateSecurePassword(providedPassword, salt);
 
 			// check if two passwords are equal
-			finalval = newSecurePassword.equalsIgnoreCase(securedPassword);  
-	          
-	        return finalval;  
-	    }  
+			finalval = newSecurePassword.equalsIgnoreCase(securedPassword);
+
+			return finalval;
+		}
 	}
 }
-	

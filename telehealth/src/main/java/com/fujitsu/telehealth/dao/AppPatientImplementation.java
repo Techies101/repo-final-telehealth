@@ -87,9 +87,8 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(9, encryptedpassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
-
 			stmt.setString(12, saltvalue);
-			stmt.setString(12, userInfo.getTh_bday());
+			stmt.setString(13, userInfo.getTh_bday());
 
 			int num = stmt.executeUpdate();
 			result = num > 0;
