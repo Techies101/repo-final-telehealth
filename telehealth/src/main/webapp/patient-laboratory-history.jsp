@@ -2,96 +2,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<title>OTS Patient Consultation History</title>
-
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');	
-
-.swal2-input {
-	border: 1px !important;
-}
-
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    	background-color: #1c87c9 !important;
-    	font-family: 'Montserrat' !important;
-    	margin-left: .5rem;
-}
-
-table td{
-	font-family: 'Montserrat', sans-serif !important;
-	
-}
-
-
-.container-search {
-	width: 60rem;
-	padding-top: 2rem;
-	margin: 0 auto;
-}
-
-#appointment th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: #1c87c9;	
-	color: white;
-}
-
-body {
-height: 100vh !important;
-}
-<%@include file="assets/stylesheet/main.css"%>
-</style>	<%@include file="includes/_linkshead.jsp"%>
+	<meta charset="ISO-8859-1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<title>OTS Patient Consultation History</title>
+	<%@include file="includes/_linkshead.jsp"%>
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
-	
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');	
-
-.swal2-input {
-	border: 1px !important;
-}
-
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    	background-color: #1c87c9 !important;
-    	font-family: 'Montserrat' !important;
-    	margin-left: .5rem;
-}
-
-table td{
-	font-family: 'Montserrat', sans-serif !important;
-	
-}
-
-
-.container-search {
-	width: 60rem;
-	padding-top: 2rem;
-	margin: 0 auto;
-}
-
-#appointment th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: #1c87c9;	
-	color: white;
-}
-
-body {
-height: 100vh !important;
-}
-
-<%@include file="assets/stylesheet/main.css"%>
-</style>
+	<link rel="stylesheet" href="assets/stylesheet/dashboard.css">
 </head>
 <body>
 	<%@include file="includes/_header.jsp"%>
-	<div class="container-search">
+	
+	<div class="container col-lg-7">
 		<h5 class="text-left">Laboratory History</h5>
 		<br>
 		<!--table-->
@@ -134,12 +58,11 @@ height: 100vh !important;
 		</div>
 	</div>
 
-	<footer class="py-3 my-4 mt-5 systemfooter ">
-		<ul class="nav justify-content-center pb-3 mb-3">
-			<p class="text-center">Service you can always count on</p>
-		</ul>
-		<p class="text-center text-muted">&copy; 2021 Online Telehealth
-			Services, Inc</p>
-	</footer>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script type="text/javascript" src="assets/js/modal.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" "></script>
 </body>
 </html>
