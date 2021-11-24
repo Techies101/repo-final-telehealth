@@ -3,9 +3,8 @@ package com.fujitsu.telehealth.utils;
 public class SQLQuery {
 	// PATIENT SIDE QUERY
 	public static final String SQL_CREATE_NEW_USER = "INSERT INTO "
-			+ "										tbl_patient(th_email, th_fname, th_middle_name, th_lname, "
+			+ "										tbl_patient(th_email, th_fname, th_middle_name, th_lname,"
 			+ "													th_address, th_age, th_gender, th_contact,"
-
 			+ "													th_password, th_condition, th_uid, th_salt, th_bday)"
 			+ "										 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 	public static final String SQL_SELECT_USER = "SELECT * FROM tbl_patient WHERE th_email=? AND th_activated='True'";

@@ -1,7 +1,9 @@
 package com.fujitsu.telehealth.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,12 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JsonObject;
+
 import com.fujitsu.telehealth.dao.AppDoctorImplementation;
+import com.fujitsu.telehealth.dao.AppPatientImplementation;
 import com.fujitsu.telehealth.model.AppointmentModel2;
+import com.fujitsu.telehealth.model.NotificationModel;
 
 public class DoctorController {
 
 	private AppDoctorImplementation appDao = new AppDoctorImplementation();
+	private AppPatientImplementation patientDao = new AppPatientImplementation();
+	private NotificationModel notifModel = new NotificationModel();
 
 	// Page Dispatcher
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
@@ -31,21 +39,21 @@ public class DoctorController {
 		String selected = request.getParameter("dropdown");
 		String uid = (String) session.getAttribute("uid");
 		String role = (String) session.getAttribute("role");
-		
-		if (uid == null)  {
+
+		if (uid == null) {
 			response.sendRedirect("login");
 			return;
 		}
-			
+
 		if (role.equals("patient")) {
 			response.sendRedirect("patient-dashboard");
 			return;
 		}
-		
-		if(selected == null) {
+
+		if (selected == null) {
 			selected = "All";
 		}
-		
+
 		List<AppointmentModel2> meeting = null;
 		meeting = appDao.displayMeeting(uid);
 		request.setAttribute("meeting", meeting);
@@ -84,13 +92,26 @@ public class DoctorController {
 		}
 
 	}
-	
-	//Approve Request 
+
+	// Approve Request
 	public void approveMeeting(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		int id = Integer.parseInt(request.getParameter("approve"));
 		String type = request.getParameter("approvetype");
 		appDao.approveMeeting(id, type);
 		dispatcher("doctor-dashboard.jsp", request, response);
+	}
+
+	public void notification(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException, ParseException {
+		HttpSession session = request.getSession();
+		String doctorUID = (String) session.getAttribute("uid");
+		NotificationModel notifModel = patientDao.getSchedule("PT-53260");
+		
+		if (notifModel == null)
+			return;
+		JsonObject json = new JsonObject();
+		PrintWriter out = response.getWriter();
+		System.out.println(notifModel.getDate());
 	}
 }

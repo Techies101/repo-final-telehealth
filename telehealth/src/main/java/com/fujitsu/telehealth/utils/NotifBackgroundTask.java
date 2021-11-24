@@ -21,28 +21,13 @@ import org.quartz.impl.StdSchedulerFactory;
 import com.fujitsu.telehealth.dao.AppPatientImplementation;
 import com.fujitsu.telehealth.model.PatientModel;
 
-public class NotifBackgroundTask extends SQLQuery implements Job {
+public class NotifBackgroundTask {
 
 	AppPatientImplementation App = new AppPatientImplementation();
 	PatientModel patient = new PatientModel();
 
-	public static void main(String args[]) throws SchedulerException {
-
-		JobDetail job = JobBuilder.newJob(NotifBackgroundTask.class).build();
-
-//		Trigger t1 = TriggerBuilder.newTrigger().withIdentity("AppointmentTrigger").startNow().build();
-//		Trigger t2 = TriggerBuilder.newTrigger().withIdentity("CronTrigger").withSchedule(CronScheduleBuilder.cronSchedule("0 0/1 * 1/1 * ? *")).build();
-		
-		Trigger t3 = TriggerBuilder.newTrigger().withIdentity("CronTrigger")
-				.withSchedule(SimpleScheduleBuilder
-						.simpleSchedule()
-						.withIntervalInSeconds(05)
-						.repeatForever()).build();
-		
-		Scheduler sc = StdSchedulerFactory.getDefaultScheduler();
-
-		sc.start();
-		sc.scheduleJob(job, t3);
+	public static void main(String args[]) throws SchedulerException, ParseException {
+		getTimeDiff("11:50 AM", "November 24, 2021");
 	}
 
 	public static Boolean getTimeDiff(String th_time, String th_date_shcedule) throws ParseException {
@@ -65,17 +50,9 @@ public class NotifBackgroundTask extends SQLQuery implements Job {
 		long actDiff = TimeUnit.MILLISECONDS.toHours(diff);
 
 		invokeReminder = (actDiff <= 2 && actDiff >= 0 && th_date_shcedule.equals(df.format(new Date()))) ? true : false;
+		System.out.println(invokeReminder);
+		System.out.println(actDiff	);
 		return invokeReminder;
-	}
-
-	@Override
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		try {
-			if (App.getSchedule(patient.getTh_patientID()) != null) return;
-			System.out.println(new Date());
-		} catch (SQLException | ParseException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

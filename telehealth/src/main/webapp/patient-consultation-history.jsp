@@ -35,6 +35,7 @@ table td{
 	<%@include file="includes/_linkshead.jsp"%>
 	<script src="assets/js/modal.js"></script>
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
+	<script type="text/javascript" src="assets/js/notif.js"></script>
 </head>
 
 </head>
