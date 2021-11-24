@@ -33,8 +33,13 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
 
+			System.out.println(result);
+
 			if (result) {
+
+				System.out.println(rs.getString("th_password"));
 				String saltvalue = rs.getString("th_salt");
+				System.out.println(saltvalue);
 				status = Encrypt.verifyUserPassword(userCredentials.getTh_password(), rs.getString("th_password"),
 						saltvalue);
 				if (status) {
@@ -44,6 +49,12 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 					String th_role = rs.getString("th_role");
 					userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
 				}
+				String th_email = rs.getString("th_email");
+				String th_fullname = rs.getString("th_fullname");
+				String th_uid = rs.getString("th_uid");
+				String th_role = rs.getString("th_role");
+				userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
+
 			}
 		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);

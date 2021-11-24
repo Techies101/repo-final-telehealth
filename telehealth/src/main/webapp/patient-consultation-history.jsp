@@ -15,23 +15,6 @@
 <link rel="stylesheet" href="assets/stylesheet/header.css">
 <link rel="stylesheet" href="assets/stylesheet/dashboard.css">
 	
-}
-
-#appointment th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: #1c87c9;	
-	color: white;
-}
-
-<%@include file="assets/stylesheet/main.css" %>
-</style>
-	<%@include file="includes/_linkshead.jsp"%>
-	<script src="assets/js/modal.js"></script>
-	<link rel="stylesheet" href="assets/stylesheet/header.css">
-	<script type="text/javascript" src="assets/js/notif.js"></script>
-</head>
 </head>
 <body>
 	
@@ -66,6 +49,7 @@
 			</table>
 		</div>
 	</div>
+
 
 	<script src="assets/js/modal.js"></script>
 </body>

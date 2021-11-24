@@ -1,9 +1,7 @@
 package com.fujitsu.telehealth.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,11 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JsonObject;
-
 import com.fujitsu.telehealth.dao.AppDoctorImplementation;
 import com.fujitsu.telehealth.model.AppointmentModel2;
-import com.fujitsu.telehealth.model.NotificationModel;
 
 public class DoctorController {
 
@@ -97,31 +92,5 @@ public class DoctorController {
 		String type = request.getParameter("approvetype");
 		appDao.approveMeeting(id, type);
 		dispatcher("doctor-dashboard.jsp", request, response);
-	}
-	
-	
-	// Notification
-	public void reminder(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException, ParseException {
-		
-		HttpSession session = request.getSession();
-		String th_duid = session.getAttribute("th_uid").toString();
-		JsonObject json = new JsonObject();
-		NotificationModel notifModel = new NotificationModel();
-		PrintWriter writer = response.getWriter();
-		
-		notifModel = appDao.getSchedule(th_duid);
-		
-		if ( notifModel != null ) {
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.setStatus(HttpServletResponse.SC_OK);
-			json.put("doctor", notifModel.getDoctor());
-			json.put("time", notifModel.getDate());
-			json.put("time", notifModel.getTime());
-			writer.print(json);
-			writer.flush();
-		}
-		
 	}
 }
