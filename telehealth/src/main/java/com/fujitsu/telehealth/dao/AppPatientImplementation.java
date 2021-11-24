@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,26 +20,6 @@ import com.fujitsu.telehealth.utils.NotifBackgroundTask;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
-
-	public static String getEncryptedValue(String value, int secret_key) {
-		String encrypt = "";
-		for (int i = 0; i < value.length(); i++) {
-			char ch = value.charAt(i);
-			ch += secret_key;
-			encrypt = encrypt + ch;
-		}
-		return encrypt;
-	}
-
-	public static String getDecryptedValue(String encrypt, int secret_key) {
-		String decrypted = "";
-		for (int i = 0; i < encrypt.length(); i++) {
-			char ch = encrypt.charAt(i);
-			ch -= secret_key;
-			decrypted = decrypted + ch;
-		}
-		return decrypted;
-	}
 
 	// Validate User
 	@Override
