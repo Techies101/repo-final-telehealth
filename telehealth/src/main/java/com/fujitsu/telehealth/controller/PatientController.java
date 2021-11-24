@@ -2,24 +2,22 @@ package com.fujitsu.telehealth.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-<<<<<<< HEAD
+
 import java.security.NoSuchAlgorithmException;
-=======
->>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
+
 import java.security.SecureRandom;
-<<<<<<< HEAD
+
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.Arrays;
-=======
+
 import java.sql.SQLException;
->>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
+
 import java.util.Base64;
 import java.util.List;
-<<<<<<< HEAD
+
 import java.util.Random;
-=======
->>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
+
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

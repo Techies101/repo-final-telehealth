@@ -19,8 +19,6 @@ import com.fujitsu.telehealth.utils.Encryption.Encrypt;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
 
-package com.fujitsu.telehealth.dao;
-
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,7 +47,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
-			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(),88);
 			stmt.setString(1, userCredentials.getTh_email());
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
@@ -109,7 +106,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(11, userInfo.getTh_patientID());
 
 			stmt.setString(12, saltvalue);
-	stmt.setString(12, userInfo.getTh_bday());
+			stmt.setString(12, userInfo.getTh_bday());
 
 			int num = stmt.executeUpdate();
 			result = num > 0;
@@ -279,7 +276,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
 
-
 				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
 				// response.setContentType("image/gif");
 				// OutputStream os = r.getOutputStream();
@@ -287,9 +283,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				// os.flush();
 				// os.close();
 				// Part image = rs.getInt("th_id");
-
-
-				
 
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
 						number, blob));
