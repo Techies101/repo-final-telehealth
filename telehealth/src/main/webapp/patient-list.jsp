@@ -18,12 +18,14 @@
 	<%@include file="includes/_header.jsp" %>
 	
 	<!-- first container -->
-	<div class="container container-search col-lg-7">
+	<br>
+	<div class="container  col-lg-8">
 		<h5 class="text-left">Patient List</h5>
 		<br>
 		<!--table-->
+	
 		<div class="table-responsive">
-			<table class="table  table-hover " id="appointment">
+			<table class="table table-hover " id="appointment">
 				<thead>
 					<tr>
 						<th class="thbg-color">ID</th>
@@ -58,7 +60,7 @@
 
 
 	<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" "></script>
 </body>
 </html>
 
