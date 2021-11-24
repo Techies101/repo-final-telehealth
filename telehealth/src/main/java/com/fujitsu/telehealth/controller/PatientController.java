@@ -297,7 +297,7 @@ public class PatientController {
 	public void uploadImage(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ClassNotFoundException {
 		int id = Integer.parseInt(request.getParameter("imageId"));
-		System.out.println(request.getPart("image"));
+		System.out.println(request.getpart ("image"));
 		Part part = request.getPart("image");
 		imageDao.paymentImage(id, part);
 		dispatcher("patient-dashboard.jsp", request, response);

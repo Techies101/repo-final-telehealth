@@ -148,8 +148,9 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String th_condition = rs.getString("th_condition");
 				String th_fullname = rs.getString("th_fullname");
 				String th_uid = rs.getString("th_uid");
+				String th_bday = rs.getString("th_bday");
 				userInfo = new PatientModel(th_email, th_fname, th_middle_name, th_lname, th_address, th_age, th_gender,
-						th_contact, th_password, th_condition, th_fullname, th_uid);
+						th_contact, th_password, th_condition, th_fullname, th_uid, th_bday);
 			}
 		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);
@@ -198,7 +199,8 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(8, patient.getTh_contact());
 			stmt.setString(9, patient.getTh_password());
 			stmt.setString(10, patient.getTh_condition());
-			stmt.setString(11, patient.getTh_patientID());
+			stmt.setString(11, patient.getTh_bday());
+			stmt.setString(12, patient.getTh_patientID());
 			int num = stmt.executeUpdate();
 			result = num > 0;
 		} catch (SQLException ex) {

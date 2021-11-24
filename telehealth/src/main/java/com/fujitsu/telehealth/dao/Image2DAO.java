@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 import com.fujitsu.telehealth.utils.DBConnection;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
+
 public class Image2DAO extends SQLQuery {
 
 	public void labImage(String uid, Part image) throws SQLException, IOException {
