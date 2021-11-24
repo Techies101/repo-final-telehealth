@@ -45,22 +45,18 @@
 					<button onclick="location.href='appointment'"  class="btn btn-primary mt-1  "><i class="fa fa-calendar-plus"></i> Request Appointment</button>
 				</div>
 			</div>
-			<script>
-				$(document).ready(function(){
-					$("#appointment").DataTable();
-				});
-			</script>
+		
 			<div class="container container-search col-md-12">
 				<div class="table-responsive w-100 ">
 					<table id="appointment" class=" table table-hover">
 						<thead>
-							
+							<tr>
 								<th>Doctor</th>
 								<th>Date</th>
 								<th>Time</th>
 								<th>Status</th>
 								<th>Action</th>
-							
+							</tr>
 						</thead>
 						<tbody>
 						
@@ -213,15 +209,7 @@
 							</c:forEach>
 						</tbody>
 
-						<thead>
-							
-							<th>Doctor</th>
-							<th>Date</th>
-							<th>Time</th>
-							<th>Status</th>
-							<th>Action</th>
 						
-					</thead>
 					</table>
 				</div>
 			</div>
