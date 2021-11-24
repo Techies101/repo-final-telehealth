@@ -271,7 +271,7 @@ table td{
 	</table>
 	
 	<div class="d-flex">
-		<button onclick="location.href='listdoc'"  class="btn btn-primary mt-4 "><i class="fa fa-calendar-plus"></i> Request Appointment</button>
+		<button onclick="location.href='appointment'"  class="btn btn-primary mt-4 "><i class="fa fa-calendar-plus"></i> Request Appointment</button>
 	</div>
 </div>
 

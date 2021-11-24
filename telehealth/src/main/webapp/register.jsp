@@ -51,13 +51,27 @@
 								id="lname">
 							<span>Patient's Last Name</span>
 						</div>
-
 						<div class="inputBox col">
-							<input type="text" name="th_age" required="required" id="age"
-								onkeypress="return /[0-9]/i.test(event.key)"
-								onkeyup="return calcAge(this)"> <span>Age</span>
-							<p id="errorAge" class="error-text"></p>
-						</div>
+					<input name="th_bday" type="datetime-local" class="form-control"
+						placeholder="Select Date of Birth" required />
+						
+				</div>
+				<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script type="text/javascript" src="assets/js/modal.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script>
+	dateConfig = {
+			maxDate: "2021-11",
+			dateFormat: "F d, Y"
+			}
+	
+		flatpickr("input[name=th_bday]", dateConfig);
+	</script>
+
+
+						
 
 						<div class="inputBox col">
 							<select id="gender" name="th_gender"

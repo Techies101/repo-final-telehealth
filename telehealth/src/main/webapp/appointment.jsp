@@ -18,17 +18,6 @@ type="text/css">
 </head>
 
 <body>
-
-<%
-	String uid = (String) session.getAttribute("uid");
-	String role = (String) session.getAttribute("role");
-		if (uid == null) 
-			response.sendRedirect("login");
-		
-		if (role.equals("doctor")) 
-			response.sendRedirect("doctor-dashboard.jsp");
-%>
-	
 	<%@include file="includes/_header.jsp"%>
 	<div class="card_wrapper mt-4">
 		<div class="container border pb-3 pt-5">
@@ -46,8 +35,8 @@ type="text/css">
 					    		<c:if test="${a.role == 'doctor'}">
 					            <option value="${a.th_uid} ${a.th_fullname}">Dr. ${a.th_fullname}</option>
 					    		</c:if>
-					        
-					    </c:forEach>					
+					    </c:forEach>		
+					    			
 					</select>
 				</div>
 				

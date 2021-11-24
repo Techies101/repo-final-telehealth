@@ -57,16 +57,6 @@ height: 100vh !important;
 </head>
 <body>
 
-	<%
-	String uid = (String) session.getAttribute("uid");
-	String role = (String) session.getAttribute("role");
-		if (uid == null) 
-			response.sendRedirect("login");
-		
-		if (role.equals("patient")) 
-			response.sendRedirect("patient-dashboard.jsp");
-	%>
-	
 	<%@include file="includes/_header.jsp"%>
 	<div class="container-search ">
 		<form action="doctor-dashboard" class="py-3 d-flex" method="post">

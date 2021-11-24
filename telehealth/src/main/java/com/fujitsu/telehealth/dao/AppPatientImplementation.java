@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.fujitsu.telehealth.dao;
 
 import java.sql.Blob;
@@ -17,6 +18,26 @@ import com.fujitsu.telehealth.utils.DBConnection;
 import com.fujitsu.telehealth.utils.Encryption.Encrypt;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
+=======
+package com.fujitsu.telehealth.dao;
+
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fujitsu.telehealth.model.AppRequestByPatient;
+import com.fujitsu.telehealth.model.AppointmentModel;
+import com.fujitsu.telehealth.model.AppointmentModel2;
+import com.fujitsu.telehealth.model.LoginModel;
+import com.fujitsu.telehealth.model.PatientModel;
+import com.fujitsu.telehealth.utils.DBConnection;
+import com.fujitsu.telehealth.utils.SQLQuery;
+
+>>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
 
 	// Validate User
@@ -29,11 +50,19 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
+<<<<<<< HEAD
+=======
+			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(),88);
+>>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
 			stmt.setString(1, userCredentials.getTh_email());
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
+<<<<<<< HEAD
 			System.out.println(result);
+=======
+>>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
 			if (result) {
+<<<<<<< HEAD
 				System.out.println(rs.getString("th_password"));
 				String saltvalue = rs.getString("th_salt");
 				System.out.println(saltvalue);
@@ -46,6 +75,13 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 					String th_role = rs.getString("th_role");
 					userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
 				}
+=======
+				String th_email = rs.getString("th_email");
+				String th_fullname = rs.getString("th_fullname");
+				String th_uid = rs.getString("th_uid");
+				String th_role = rs.getString("th_role");
+				userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
+>>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
 			}
 		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);
@@ -77,7 +113,11 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(9, encryptedpassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
+<<<<<<< HEAD
 			stmt.setString(12, saltvalue);
+=======
+			stmt.setString(12, userInfo.getTh_bday());
+>>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
 			int num = stmt.executeUpdate();
 			result = num > 0;
 		} catch (SQLException ex) {
@@ -245,6 +285,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String remarks = rs.getString("th_remarks");
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
+<<<<<<< HEAD
 
 				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
 				// response.setContentType("image/gif");
@@ -254,6 +295,9 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				// os.close();
 				// Part image = rs.getInt("th_id");
 
+=======
+				
+>>>>>>> branch 'master' of https://github.com/Techies101/repo-final-telehealth.git
 				listRequest.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks,
 						number, blob));
 			}
