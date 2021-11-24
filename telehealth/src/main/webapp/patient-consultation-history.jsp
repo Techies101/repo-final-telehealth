@@ -14,6 +14,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/stylesheet/header.css">
 <link rel="stylesheet" href="assets/stylesheet/dashboard.css">
+
 }
 
 #appointment th {
@@ -31,7 +32,6 @@
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
 	<script type="text/javascript" src="assets/js/notif.js"></script>
 </head>
-
 </head>
 <body>
 	
@@ -66,8 +66,6 @@
 			</table>
 		</div>
 	</div>
-
-
 	<script src="assets/js/modal.js"></script>
 </body>
 </html>
