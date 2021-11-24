@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
-	
+
 	<%@include file="./includes/_header.jsp"%>
 	<%@include file="./includes/_showcase.jsp"%>
 	<%@include file="./includes/_footer.jsp"%>

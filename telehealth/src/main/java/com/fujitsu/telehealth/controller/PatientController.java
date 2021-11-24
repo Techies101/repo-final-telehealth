@@ -24,11 +24,11 @@ import com.fujitsu.telehealth.dao.ImageListDAO;
 import com.fujitsu.telehealth.model.AppRequestByPatient;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
+import com.fujitsu.telehealth.model.HtmlTemplate;
 import com.fujitsu.telehealth.model.LabModel;
 import com.fujitsu.telehealth.model.LoginModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.model.SendMail;
-import com.fujitsu.telehealth.model.HtmlTemplate;
 
 public class PatientController {
 
@@ -37,8 +37,8 @@ public class PatientController {
 	ImageDAO imageDao = new ImageDAO();
 	Image2DAO imageDao2 = new Image2DAO();
 	ImageListDAO imageListDao = new ImageListDAO();
-	SendMail mail = new SendMail();
 	HtmlTemplate template = new HtmlTemplate();
+	SendMail mail = new SendMail();
 
 	// Page Dispatcher
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
@@ -69,7 +69,6 @@ public class PatientController {
 		}
 
 	}
-
 
 	// Check user Exist
 	public void checkUser(HttpServletRequest request, HttpServletResponse response)
@@ -136,10 +135,11 @@ public class PatientController {
 		String th_password = request.getParameter("th_password").trim();
 		String th_condition = request.getParameter("th_condition");
 		String th_address = request.getParameter("th_address");
-
 		String th_patientID = new PatientModel().getTh_patientID() + Integer.parseInt(generateUniqueID());
+		String th_bday = request.getParameter("th_bday");
+		
 		PatientModel userInfo = new PatientModel(th_patientID, th_email, th_first_name, th_middle_name, th_last_name,
-				th_address, th_age, th_gender, th_contact, th_password, th_condition);
+				th_address, th_age, th_gender, th_contact, th_password, th_condition,th_bday);
 
 		if (AppPatientImpl.createNewUser(userInfo)) {
 			String token = createToken().replace("=", "");
@@ -223,8 +223,9 @@ public class PatientController {
 		String th_contact = request.getParameter("th_contact").replace(" ", "");
 		String th_password = request.getParameter("th_password");
 		String th_condition = request.getParameter("th_condition");
-		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,
-				th_age, th_gender, th_contact, th_password, th_condition);
+		String th_bday = request.getParameter("th_bday");
+		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,th_age,
+				th_gender, th_contact, th_password, th_condition, th_bday);
 
 		if (AppPatientImpl.updateAccount(userInfo)) {
 			responseText(response, "success");

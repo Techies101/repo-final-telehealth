@@ -8,21 +8,13 @@
 <title>Account Personalisation</title>
 
 	<%@include file="includes/_linkshead.jsp"%>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
 	<link rel="stylesheet" href="assets/stylesheet/accountstyles.css">
 
 </head>
 <body>
 	<%@include file="includes/_header.jsp"%>
-	<!-- EDITTABLE FORM FOR ACCOUNT DETAILS UPDATE -->
-
-	<div class="account-center">
-		<div class="testbox">
-			<form action="update" id="update-form" class="border my-info">
-				<fieldset>
-					<legend class="rounded-3">Update Details</legend>
-					<div class="colums">
-
 
 	<div class="container rounded bg-white mt-3 mb-5  ">
 		<div class="container updateform">
