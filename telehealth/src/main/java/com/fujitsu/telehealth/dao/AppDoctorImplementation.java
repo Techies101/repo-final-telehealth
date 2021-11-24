@@ -11,6 +11,7 @@ import java.util.List;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
 import com.fujitsu.telehealth.model.LabModel;
+import com.fujitsu.telehealth.model.NotificationModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.utils.DBConnection;
 import com.fujitsu.telehealth.utils.SQLQuery;
@@ -234,5 +235,25 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 		}
 		return lab;
 	}
+
+	@Override
+	public NotificationModel getSchedule(String th_did) throws SQLException {
+		
+		Connection con = null;
+		
+		try {
+			con = DBConnection.connect();
+			PreparedStatement stmt = con.prepareStatement(SELECT_SCHEDULE_BY_DOCTOR);
+			stmt.setString(1, th_did);
+			ResultSet rs = stmt.executeQuery();
+			
+		}catch (SQLException sqlex) {
+			DBConnection.printSQLException(sqlex);
+		}
+		
+		return null;
+	}
+	
+	
 
 }
