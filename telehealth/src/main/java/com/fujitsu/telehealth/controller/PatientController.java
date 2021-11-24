@@ -2,11 +2,17 @@ package com.fujitsu.telehealth.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
+import java.util.Random;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -70,7 +76,6 @@ public class PatientController {
 
 	}
 
-
 	// Check user Exist
 	public void checkUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
@@ -88,7 +93,6 @@ public class PatientController {
 
 		String th_email = request.getParameter("th_email").trim();
 		String th_password = request.getParameter("th_password").trim();
-		System.out.println(th_password);
 		LoginModel user = new LoginModel(th_email, th_password);
 		PatientModel userInfo = AppPatientImpl.validate(user);
 		HttpSession session = request.getSession();

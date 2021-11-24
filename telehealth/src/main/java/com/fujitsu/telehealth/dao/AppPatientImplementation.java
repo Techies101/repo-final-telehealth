@@ -1,4 +1,5 @@
 package com.fujitsu.telehealth.dao;
+
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,29 +14,10 @@ import com.fujitsu.telehealth.model.AppointmentModel2;
 import com.fujitsu.telehealth.model.LoginModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.utils.DBConnection;
+import com.fujitsu.telehealth.utils.Encryption.Encrypt;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
-
-	public static String getEncryptedValue(String value, int secret_key) {
-		String encrypt = "";
-		for (int i = 0; i < value.length(); i++) {
-			char ch = value.charAt(i);
-			ch += secret_key;
-			encrypt = encrypt + ch;
-		}
-		return encrypt;
-	}
-
-	public static String getDecryptedValue(String encrypt, int secret_key) {
-		String decrypted = "";
-		for (int i = 0; i < encrypt.length(); i++) {
-			char ch = encrypt.charAt(i);
-			ch -= secret_key;
-			decrypted = decrypted + ch;
-		}
-		return decrypted;
-	}
 
 	// Validate User
 	@Override
@@ -43,31 +25,33 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		PatientModel userInfo = null;
 		Connection con = null;
 		try {
+			Boolean status = false;
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
-			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(),88);
-			System.out.println(userCredentials.getTh_password().equals(encryptedPassword));
 			stmt.setString(1, userCredentials.getTh_email());
-			stmt.setString(2, encryptedPassword);
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
-			System.out.println(encryptedPassword);
-			System.out.println(userCredentials.getTh_password());
+			System.out.println(result);
 			if (result) {
-				String th_email = rs.getString("th_email");
-				String th_fullname = rs.getString("th_fullname");
-				String th_uid = rs.getString("th_uid");
-				String th_role = rs.getString("th_role");
-				String th_password = rs.getString("th_password");
-				userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
+				System.out.println(rs.getString("th_password"));
+				String saltvalue = rs.getString("th_salt");
+				System.out.println(saltvalue);
+				status = Encrypt.verifyUserPassword(userCredentials.getTh_password(), rs.getString("th_password"),
+						saltvalue);
+				if (status) {
+					String th_email = rs.getString("th_email");
+					String th_fullname = rs.getString("th_fullname");
+					String th_uid = rs.getString("th_uid");
+					String th_role = rs.getString("th_role");
+					userInfo = new PatientModel(th_email, th_fullname, th_uid, th_role);
+				}
 			}
 		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);
 		} finally {
 			con.close();
 		}
-
 		return userInfo;
 	}
 
@@ -76,7 +60,8 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 	public boolean createNewUser(PatientModel userInfo) throws SQLException {
 		boolean result = false;
 		Connection con = null;
-		String encryptedPassword = getEncryptedValue(userInfo.getTh_password(), 88);
+		String saltvalue = Encrypt.getSaltvalue(30);
+		String encryptedpassword = Encrypt.generateSecurePassword(userInfo.getTh_password(), saltvalue);
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
@@ -89,9 +74,10 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(6, userInfo.getTh_age());
 			stmt.setString(7, userInfo.getTh_gender());
 			stmt.setString(8, userInfo.getTh_contact());
-			stmt.setString(9, encryptedPassword);
+			stmt.setString(9, encryptedpassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
+			stmt.setString(12, saltvalue);
 			int num = stmt.executeUpdate();
 			result = num > 0;
 		} catch (SQLException ex) {
@@ -215,9 +201,9 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
-			
+
 			String parts[] = requestInfo.getTh_doctor().split(" ", 2);
-			
+
 			stmt = con.prepareStatement(SQL_REQUEST_APPOINTMENT);
 			stmt.setString(1, String.format("%s", parts[1]));
 			stmt.setString(2, requestInfo.getTh_patient_name());
@@ -259,7 +245,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String remarks = rs.getString("th_remarks");
 				int number = rs.getInt("th_id");
 				Blob blob = rs.getBlob("th_image");
-				
+
 				// byte byteArray[] = blob.getBytes(1, (int) blob.length());
 				// response.setContentType("image/gif");
 				// OutputStream os = r.getOutputStream();
@@ -321,9 +307,9 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(2, email);
 			int rs = stmt.executeUpdate();
 			return rs > 0;
-		}catch (SQLException ex) {
+		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);
-		}finally {
+		} finally {
 			con.close();
 		}
 		return false;
