@@ -70,7 +70,6 @@ public class PatientController {
 
 	}
 
-
 	// Check user Exist
 	public void checkUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
