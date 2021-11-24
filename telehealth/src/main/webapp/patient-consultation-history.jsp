@@ -2,51 +2,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');	
+<meta charset="ISO-8859-1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+	<title>
+		Patient Consultation History
+	</title>
 
-#appointment, #dropdown {
-	margin: auto;
-	width: 80%;
-}
-
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
-    	background-color: #1c87c9 !important;
-    	font-family: 'Montserrat' !important;
-}
-
-table td{
-	font-family: 'Montserrat', sans-serif !important;
+<%@include file="includes/_linkshead.jsp"%>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="assets/stylesheet/header.css">
+<link rel="stylesheet" href="assets/stylesheet/dashboard.css">
 	
-}
-
-#appointment th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: #1c87c9;	
-	color: white;
-}
-
-<%@include file="assets/stylesheet/main.css" %>
-</style>
-	<%@include file="includes/_linkshead.jsp"%>
-	<script src="assets/js/modal.js"></script>
-	<link rel="stylesheet" href="assets/stylesheet/header.css">
-</head>
-
 </head>
 <body>
 	
 	<%@include file="includes/_header.jsp" %>
 
-	<div class="container">
+	<div class="container container-search col-lg-7">
 		<h5 class="text-left">Consultation History</h5>
 		<br>
-
-
 		<!--table-->
 		<div class="table-responsive">
 			<table class="table  table-hover " id="appointment">
@@ -74,12 +50,7 @@ table td{
 		</div>
 	</div>
 
-	<footer class="py-3 my-4 mt-5 systemfooter ">
-		<ul class="nav justify-content-center pb-3 mb-3">
-			<p class="text-center">Service you can always count on</p>
-		</ul>
-		<p class="text-center text-muted">&copy; 2021 Online Telehealth
-			Services, Inc</p>
-	</footer>
+
+	<script src="assets/js/modal.js"></script>
 </body>
 </html>

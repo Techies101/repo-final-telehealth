@@ -15,7 +15,7 @@
 <body>
 	<%@include file="includes/_header.jsp"%>
 	
-	<div class="container col-lg-7">
+	<div class="container container-search col-lg-7">
 		<h5 class="text-left">Laboratory History</h5>
 		<br>
 		<!--table-->
