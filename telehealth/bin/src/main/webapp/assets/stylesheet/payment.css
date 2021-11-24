@@ -1,0 +1,338 @@
+@import
+  url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+body{
+	background-image: url("../../img/background.png") !important;
+	background-size: cover ;
+	background-repeat: no-repeat ; 
+    font-size: 16px;
+}
+
+.container  .registrationForm {
+	width: 40%;
+	padding: 3%;
+	margin-top: 5%;
+	background : #EAEAEA;
+	opacity: 90%;
+	border-radius: 15px;
+	background: #EAEAEA;
+}
+
+.center  { 
+	margin:auto;
+
+}
+.txtcenter{
+	text-align: center;
+}
+input{
+	border-radius: 5px;
+}
+.btn-login{
+    border-width: 3px;
+    border-radius: 20px;
+    border-color: #1c87c9;
+    padding-left: 20px;
+    padding-right:20px;
+    font-weight: 600;
+  }
+  .btn-login:hover{
+    background-color:#1c87c9 ;
+    color: white;
+   
+  }
+.regForm{
+	width: 500px;
+    height: 740px;
+    padding: 40px;
+    background: #ffffff;
+    opacity: 90%;
+    border-radius: 15px;
+	margin: auto;
+}
+.regForm h2
+{
+    font-size: 30px;
+    color: #333;
+    font-weight: 500;
+}
+.regForm .inputBox
+{
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.regForm .inputBox input,
+.regForm .inputBox textarea
+{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    resize: none;
+    border-radius: 3px;
+}
+.regForm .inputBox span
+{
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #666;
+    
+}
+.regForm .inputBox input:focus ~ span,
+.regForm .inputBox input:valid ~ span,
+.regForm .inputBox textarea:focus ~ span,
+.regForm .inputBox textarea:valid ~ span
+{
+    color: #0a0a0a;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+.regForm .inputBox input[type="submit"]
+{
+    width: 100px;
+    background: #fccc04;
+    color: #070707;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+.loginForm
+{
+    width: 400px;
+    height: 440px;
+    padding: 40px;
+    background: #ffffff;
+    opacity: 90%;
+    border-radius: 15px;
+	margin: auto;
+  
+}
+.loginForm h2
+{
+    font-size: 30px;
+    color: #333;
+    font-weight: 500;
+}
+.loginForm .inputBox
+{
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.loginForm .inputBox input,
+.loginForm .inputBox textarea
+{
+    width: 100%;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    resize: none;
+    border-radius: 3px;
+}
+.loginForm .inputBox span
+{
+    position: absolute;
+    left: 0;
+    padding: 5px 0;
+    font-size: 16px;
+    margin: 10px 0;
+    pointer-events: none;
+    transition: 0.5s;
+    color: #666;
+    
+}
+.loginForm .inputBox input:focus ~ span,
+.loginForm .inputBox input:valid ~ span,
+.loginForm .inputBox textarea:focus ~ span,
+.loginForm .inputBox textarea:valid ~ span
+{
+    color: #0a0a0a;
+    font-size: 12px;
+    transform: translateY(-20px);
+}
+.loginForm .inputBox input[type="submit"]
+{
+    width: 100px;
+    background: #fccc04;
+    color: #070707;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 18px;
+}
+@media (max-width: 991px)
+{
+    .contact
+    {
+        padding: 50px;
+    }
+    .container
+    {
+        flex-direction: column;
+    }
+    .container .contactInfo
+    {
+        margin-bottom: 40px;
+    }
+    .container .contactInfo
+    {
+        width: 100%;
+    }
+}
+.white{
+  color: rgb(255, 255, 255);
+}
+.toplogo{
+	font-size: 20px;
+	text-align: center;
+}
+
+.logo{
+    color:#1c87c9;
+  }
+  .btn-get{
+  border-width: 3px;
+  border-radius: 20px;
+  background-color:#048db3 ;
+  color: #ffffff;
+  padding-left: 20px;
+  padding-right:20px;
+  font-weight: 600;
+  font-size: large;
+  box-shadow: inset;
+}
+.btn-get:hover{
+  background-color:#1c87c9 ;
+  color: rgb(0, 0, 0);
+ 
+}
+@media screen and (min-width: 1024px){
+    /*Style*/
+        .digital-payment{
+            background-color: white;
+            width: 60%;
+            margin: auto;
+            padding-top: 30px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 30px;
+            border-radius: 20px;
+            border-color: black !important;
+            border-width: 1px !important;
+            align-items: center;
+            opacity: 90%;
+            box-shadow: 5px 5px rgba(51, 51, 51, 0.575);
+        }
+        .digital-method{
+            height: 150px;
+            width: 230px;
+            border-radius: 10px;
+            margin:auto
+        
+        }
+        .card{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-radius: 15px;
+            width: 260px;
+            margin:auto;
+        }
+        
+          .btn-done{
+            
+            background-color:#1c87c9;
+            padding:10px;
+            font-weight: 600;
+            color: white;
+            
+          }
+          .btn-done:hover{
+            background-color:#49b9ff ;
+            color: black;
+           
+          }
+    }
+  
+    
+    /*### Smartphones (portrait and landscape)(small)### */
+    @media screen and (min-width : 0px) and (max-width : 1023px){
+    /*Style*/
+        .digital-payment{
+            background-color: white;
+            width: 100%;
+            margin: auto;
+            padding-top: 30px;
+            padding-left: 30px;
+            padding-right: 30px;
+            padding-bottom: 30px;
+            border-radius: 20px;
+            border-color: black !important;
+            border-width: 1px !important;
+            align-items: center;
+            opacity: 90%;
+            box-shadow: 5px 5px rgba(51, 51, 51, 0.575);
+            
+        }
+        .digital-method{
+            height: 140px;
+            width: 180px;
+            border-radius: 10px;
+            margin:auto
+        
+        }
+        .card{
+            
+            border-radius: 15px;
+            width:210px ;
+            margin:auto;
+            margin-bottom: 10px;
+
+        }
+        .container{
+            width: 100%;
+        
+           
+          }
+          .btn-done{
+       
+            background-color:#1c87c9;
+            padding:10px;
+            font-weight: 600;
+            color: white;
+            margin-top: 10px;
+          }
+          .btn-done:hover{
+            background-color:#49b9ff ;
+            color: black;
+            
+          }
+    }
+
+
+
+
+.dgm:hover{
+    box-shadow: 8px 8px  5px 5px #1c87c9;
+    
+
+}
+.dg-inside{
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #666;
+}
