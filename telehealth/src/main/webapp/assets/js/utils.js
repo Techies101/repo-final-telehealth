@@ -84,10 +84,10 @@ $("#register-form").submit(function(e) {
 		data: form.serialize(),
 		success: function(result) {
 			if (result == 'success') {
-				modal(result, "Registration Successfull", "Please check your email for verifcation to activate your account, Thank you!");
+				modalAlert(result, "Registration Successfull", "Please check your email for verifcation to activate your account, Thank you!");
 				setTimeout(() => location.href = "login", 5000)
 			} else {
-				modal("error", "Registration failed please check")
+				modalAlert("error", "Registration failed please check")
 			}
 		}
 	});

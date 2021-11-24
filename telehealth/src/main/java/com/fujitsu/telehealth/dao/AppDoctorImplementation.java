@@ -250,7 +250,7 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 			if (rs.next()) {
 				String appointment_time = rs.getString("th_time");
 				String appointment_date = rs.getString("th_date");
-				String doctor = rs.getString("th_doctor");
+//				String doctor = rs.getString("th_doctor");
 				System.out.println(NotifBackgroundTask.getTimeDiff(appointment_time, appointment_date));
 			}
 			

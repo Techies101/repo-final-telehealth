@@ -1,4 +1,4 @@
-const modal = (res, message, text = '') => {
+const modalAlert = (res, message, text = '') => {
 	Swal.fire({
 		icon: res,
 		title: message,
@@ -18,7 +18,6 @@ const modalRedirect = (title, html) => {
 		timerProgressBar: true,
 		didOpen: () => {
 			Swal.showLoading()
-			const b = Swal.getHtmlContainer().querySelector('b')
 			timerInterval = setInterval(() => {
 			}, 1000)
 		},
