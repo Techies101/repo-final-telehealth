@@ -18,23 +18,6 @@ import com.fujitsu.telehealth.utils.DBConnection;
 import com.fujitsu.telehealth.utils.Encryption.Encrypt;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
-
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fujitsu.telehealth.model.AppRequestByPatient;
-import com.fujitsu.telehealth.model.AppointmentModel;
-import com.fujitsu.telehealth.model.AppointmentModel2;
-import com.fujitsu.telehealth.model.LoginModel;
-import com.fujitsu.telehealth.model.PatientModel;
-import com.fujitsu.telehealth.utils.DBConnection;
-import com.fujitsu.telehealth.utils.SQLQuery;
-
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
 
 	// Validate User
