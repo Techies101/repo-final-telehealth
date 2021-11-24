@@ -2,7 +2,6 @@ package com.fujitsu.telehealth.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -84,9 +83,6 @@ public class WebServiceController extends HttpServlet {
 			case "/doctor-dashboard":
 				DoctorController.displayMeeting(request, response);
 				break;
-			case "/notification":
-				DoctorController.notification(request, response);
-				break;
 				
 			// POST METHOD DOCTOR
 			case "/update-link":
@@ -126,11 +122,7 @@ public class WebServiceController extends HttpServlet {
 				PatientController.listRequest(request, response);
 				break;
 			}
-		} catch (ServletException | 
-				 IOException | 
-				 SQLException | 
-				 ClassNotFoundException | 
-				 ParseException ex) {
+		} catch (ServletException | IOException | SQLException | ClassNotFoundException ex) {
 			ex.printStackTrace();
 		}
 	}
