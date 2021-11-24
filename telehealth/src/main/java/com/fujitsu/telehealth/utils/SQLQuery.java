@@ -33,5 +33,5 @@ public class SQLQuery {
 	public static final String SELECT_PATIENT_BY_UID = "SELECT th_patientid, th_email, th_fname, th_middle_name, th_lname, th_address,th_age, th_gender, th_contact, th_condition, th_fullname, th_uid from tbl_patient WHERE th_uid=?, th_bday";
 	public static final String SELECT_PATIENT_CONSULTATION_BY_UID = "select th_doctor, th_patient, th_date, th_time, th_status, th_link, th_comment, th_remarks, th_id, th_uid, th_image from tbl_appointment where th_uid=?";
 	public static final String SELECT_PATIENT_LABORATORY_BY_UID = "select th_doctor, th_patient, th_date, th_time, th_status, th_link, th_comment, th_remarks, th_id, th_uid, th_image from tbl_appointment where th_uid=?";
-	public static final String SLECT_APPOINTMENT_BY_DOCTOR = "SELECT * FROM tbl_appointment WHERE th_did=? AND th_status='Payment'";
+	
 }
