@@ -24,6 +24,7 @@
 	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="assets/js/modal.js"></script>
+	
 	<script>
 		AOS.init();
 		$('.carousel')

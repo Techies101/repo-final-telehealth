@@ -21,26 +21,6 @@ import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
 
-	public static String getEncryptedValue(String value, int secret_key) {
-		String encrypt = "";
-		for (int i = 0; i < value.length(); i++) {
-			char ch = value.charAt(i);
-			ch += secret_key;
-			encrypt = encrypt + ch;
-		}
-		return encrypt;
-	}
-
-	public static String getDecryptedValue(String encrypt, int secret_key) {
-		String decrypted = "";
-		for (int i = 0; i < encrypt.length(); i++) {
-			char ch = encrypt.charAt(i);
-			ch -= secret_key;
-			decrypted = decrypted + ch;
-		}
-		return decrypted;
-	}
-
 	// Validate User
 	@Override
 	public PatientModel validate(LoginModel userCredentials) throws SQLException {
@@ -50,9 +30,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
-			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(), 88);
 			stmt.setString(1, userCredentials.getTh_email());
-			stmt.setString(2, encryptedPassword);
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
 			if (result) {
@@ -76,7 +54,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 	public boolean createNewUser(PatientModel userInfo) throws SQLException {
 		boolean result = false;
 		Connection con = null;
-		String encryptedPassword = getEncryptedValue(userInfo.getTh_password(), 88);
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
@@ -89,7 +66,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(6, userInfo.getTh_age());
 			stmt.setString(7, userInfo.getTh_gender());
 			stmt.setString(8, userInfo.getTh_contact());
-			stmt.setString(9, encryptedPassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
 			stmt.setString(12, userInfo.getTh_bday());
@@ -323,6 +299,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		return false;
 	}
 
+
 	public NotificationModel getSchedule(String th_did) throws SQLException, ParseException {
 		Connection con = null;
 		try {
@@ -335,22 +312,21 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String appointment_date = rs.getString("th_date");
 				String appointment_time = rs.getString("th_time");
 				String doctor = rs.getString("th_doctor");
-				String message = "Hi Dr. " + doctor + "!, " + "You have schedule later at " + appointment_time
-						+ " please be reminded.";
+				String message = "Hi Dr. " + doctor + "!, " + "You have schedule later at " + appointment_time + " please be reminded.";
 				boolean checkNotif = NotifBackgroundTask.getTimeDiff(appointment_time, appointment_date);
 				if (checkNotif) {
 					return new NotificationModel(appointment_time, appointment_date, message, doctor);
 				}
 			}
-		} catch (SQLException sqlex) {
-			DBConnection.printSQLException(sqlex);
-		} catch (ParseException pe) {
+		}catch(SQLException sqlex) {
+			DBConnection.printSQLException(sqlex); 
+		} catch(ParseException pe) {
 			pe.printStackTrace();
-		} finally {
+		}finally {
 			con.close();
 		}
-
+		
 		return null;
-
+		
 	}
 }
