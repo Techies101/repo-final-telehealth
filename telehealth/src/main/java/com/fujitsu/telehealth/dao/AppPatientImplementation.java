@@ -1,3 +1,4 @@
+
 package com.fujitsu.telehealth.dao;
 
 import java.sql.Blob;
@@ -30,9 +31,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			stmt = con.prepareStatement(SQL_SELECT_USER);
-			String encryptedPassword = getEncryptedValue(userCredentials.getTh_password(), 88);
 			stmt.setString(1, userCredentials.getTh_email());
-			stmt.setString(2, encryptedPassword);
 			ResultSet rs = stmt.executeQuery();
 			boolean result = rs.next();
 			if (result) {
@@ -56,7 +55,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 	public boolean createNewUser(PatientModel userInfo) throws SQLException {
 		boolean result = false;
 		Connection con = null;
-		String encryptedPassword = getEncryptedValue(userInfo.getTh_password(), 88);
 		try {
 			con = DBConnection.connect();
 			PreparedStatement stmt;
@@ -69,7 +67,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			stmt.setString(6, userInfo.getTh_age());
 			stmt.setString(7, userInfo.getTh_gender());
 			stmt.setString(8, userInfo.getTh_contact());
-			stmt.setString(9, encryptedPassword);
 			stmt.setString(10, userInfo.getTh_condition());
 			stmt.setString(11, userInfo.getTh_patientID());
 			stmt.setString(12, userInfo.getTh_bday());
