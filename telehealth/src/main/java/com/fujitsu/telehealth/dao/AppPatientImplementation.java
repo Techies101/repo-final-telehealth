@@ -291,6 +291,7 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 				String th_remarks = rs.getString("th_remarks");
 				int th_id = rs.getInt("th_id");
 				Blob th_image = rs.getBlob("th_image");
+				
 				tbl_appointment.add(new AppointmentModel(th_doctor, th_patient, th_date, th_time, th_status, th_link,
 						th_comment, th_remarks, th_id, th_uid, th_image));
 			}
@@ -318,5 +319,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		}
 		return false;
 	}
-
+	
+	
 }
