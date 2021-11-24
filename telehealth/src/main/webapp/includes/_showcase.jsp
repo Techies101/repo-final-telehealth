@@ -1,76 +1,59 @@
 <!--Carousel Pics-->
 <section id="home">
-	<div id="carouselExampleCaptions" class="carousel slide"
-		data-bs-ride="carousel">
+	<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+	  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 		<div class="carousel-indicators">
-			<button type="button" data-bs-target="#carouselExampleCaptions"
-				data-bs-slide-to="0" class="active" aria-current="true"
-				aria-label="Slide 1"></button>
-			<button type="button" data-bs-target="#carouselExampleCaptions"
-				data-bs-slide-to="1" aria-label="Slide 2"></button>
-			<button type="button" data-bs-target="#carouselExampleCaptions"
-				data-bs-slide-to="2" aria-label="Slide 3"></button>
-		</div>
+		  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		  <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		</div> 
 		<div class="carousel-inner">
-			<div class="carousel-item active ">
-				<div class="slides">
-					<div class="slide-1">
-						<div class="overlay"></div>
-					</div>
-				</div>
-				<!--<img src="img/sample1.jpg" class="d-block w-100" alt="...">-->
-
-				<div class="carousel-caption d-none d-md-block">
-					<h2>Talk to your doctor live over the phone or video chat.</h2>
-					<br>
-					<button type="button" class="btn btn-get" onclick="location.href='register'">Get Started</button>
-					<br> <br> <br> <br> <br>
-
-				</div>
+		  <div class="carousel-item active ">  
+			<div class="slides">
+			  <div class="slide-1">
+				<div class="overlay"></div>
+			  </div>
 			</div>
-			<div class="carousel-item">
-				<div class="slides">
-					<div class="slide-2">
-						<div class="overlay"></div>
-					</div>
-				</div>
-				<div class="carousel-caption d-none d-md-block">
-					<h2>Send and receive messages from your doctor using secure
-						messaging, email, secure messaging, and secure file exchange.</h2>
-					<br>
-					<button class="btn btn-get">Get Started</button>
-					<br> <br> <br> <br> <br>
-				</div>
+			<div class="carousel-caption d-none d-md-block">
+			  <h2>Talk to your doctor live over the phone or video chat.</h2><br>
+			  <button class="btn btn-get"> Get Started </button> <br> <br> <br> <br><br> <br><br> <br><br>
+			  
 			</div>
-
-			<div class="carousel-item">
-				<div class="slides">
-					<div class="slide-3">
-						<div class="overlay"></div>
-					</div>
-				</div>
-				<div class="carousel-caption d-none d-md-block">
-					<h2>Use remote monitoring so your doctor can check on you at
-						home. For example, you might use a device to gather vital signs or
-						other vitals to help your doctor stay informed on your progress.</h2>
-					<br>
-					<button class="btn btn-get">Get Started</button>
-					<br> <br> <br> <br> <br>
-				</div>
+		  </div>
+		  <div class="carousel-item">
+			<div class="slides">
+			  <div class="slide-2">
+				<div class="overlay"></div>
+			  </div>
 			</div>
+			<div class="carousel-caption d-none d-md-block">
+			  <h2>Send and receive messages from your doctor using secure messaging, email, secure messaging, and secure file exchange.</h2><br>
+			  <button class="btn btn-get"> Get Started </button> <br> <br> <br><br> <br> <br> <br> <br> <br>
+			</div>
+		  </div>
+		  
+		  <div class="carousel-item">
+			<div class="slides">
+			  <div class="slide-3">
+				<div class="overlay"></div>
+			  </div>
+			</div>
+			<div class="carousel-caption d-none d-md-block">
+			  <h2>Use remote monitoring so your doctor can check on you at home. For example, you might use a device to gather vital signs or other vitals to help your doctor stay informed on your progress.</h2><br>
+			  <button class="btn btn-get"> Get Started </button> <br> <br> <br> <br><br> <br><br><br>
+			</div>
+		  </div>
 		</div>
-		<button class="carousel-control-prev" type="button"
-			data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Previous</span>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Previous</span>
 		</button>
-		<button class="carousel-control-next" type="button"
-			data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
-				class="visually-hidden">Next</span>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="visually-hidden">Next</span>
 		</button>
-	</div>
-</section>
+	  </div>
+	</section>
 
 <!--Services-->
 <section id="services" >
