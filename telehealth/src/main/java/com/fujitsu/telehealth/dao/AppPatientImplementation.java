@@ -21,26 +21,6 @@ import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppPatientImplementation extends SQLQuery implements AppPatientInterface {
 
-	public static String getEncryptedValue(String value, int secret_key) {
-		String encrypt = "";
-		for (int i = 0; i < value.length(); i++) {
-			char ch = value.charAt(i);
-			ch += secret_key;
-			encrypt = encrypt + ch;
-		}
-		return encrypt;
-	}
-
-	public static String getDecryptedValue(String encrypt, int secret_key) {
-		String decrypted = "";
-		for (int i = 0; i < encrypt.length(); i++) {
-			char ch = encrypt.charAt(i);
-			ch -= secret_key;
-			decrypted = decrypted + ch;
-		}
-		return decrypted;
-	}
-
 	// Validate User
 	@Override
 	public PatientModel validate(LoginModel userCredentials) throws SQLException {
