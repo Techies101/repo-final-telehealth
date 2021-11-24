@@ -1,0 +1,220 @@
+body {
+	background-image: url("../../img/dg2.jpg") !important;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	font-family: "Century Gothic" !important;
+	max-height: 100vh;
+}
+
+.container  .registrationForm {
+	width: 40%;
+	padding: 3%;
+	margin-top: 5%;
+	background: #EAEAEA;
+	opacity: 90%;
+	border-radius: 15px;
+	background: #EAEAEA;
+}
+
+.center {
+	margin: auto;
+}
+
+p.error-text {
+	text-align: left !important;
+	font-size: .8rem !important;
+	margin: 0 !important;
+}
+
+.txtcenter {
+	text-align: center;
+}
+
+.form-control[readonly] {
+	background-color: #fff !important;
+}
+
+.btn-login {
+	border-width: 3px;
+	border-radius: 20px;
+	border-color: #1c87c9;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-weight: 600;
+}
+
+.btn-login:hover {
+	background-color: #1c87c9;
+	color: white;
+}
+
+.toplogo {
+	text-align: center;
+}
+
+.regForm {
+	background: #ffffff;
+	opacity: 90%;
+	border-radius: 15px;
+	max-width: 30rem;
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+	margin: 0 auto;
+}
+
+.loginForm h2 , .regForm h2 {
+	font-size: 30px;
+	color: #333;
+	font-weight: 500;
+}
+
+.loginForm .inputBox, .regForm .inputBox {
+	position: relative;
+	margin-top: 10px;
+}
+
+.loginForm .inputBox select, .regForm .inputBox select {
+	width: 100%;
+	line-height: 100%;
+	outline: none;
+	border: none;
+	border-bottom: 2px solid #333;
+	font-size: 16px;
+	margin-top: 7px;
+}
+
+.loginForm .inputBox input, .loginForm .inputBox textarea,
+.regForm .inputBox input, .regForm .inputBox textarea {
+	width: 100%;
+	padding: 5px 0;
+	font-size: 16px;
+	margin: 10px 0;
+	border: none;
+	border-bottom: 2px solid #333;
+	outline: none;
+	resize: none;
+}
+.loginForm .inputBox span,
+.regForm .inputBox span {
+	position: absolute;
+	left: 20px;
+	padding: 5px 0;
+	font-size: 16px;
+	margin: 10px 0;
+	pointer-events: none;
+	transition: 0.5s;
+	color: #666;
+}
+
+.custom_signin-btn {
+	font-size: 1rem;
+}
+
+.custom_signin-btn:hover {
+	text-decoration: underline;
+}
+
+#visibility, #calendar {
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	top: 20%;
+	color: #bbc;
+}
+
+.custom_select-padding {
+	padding: 7.888px 0;
+	font-size: 16px;
+}
+
+.regForm .inputBox input:focus ~ span, .regForm .inputBox input:valid ~
+	span, .regForm .inputBox textarea:focus ~ span, .regForm .inputBox textarea:valid 
+	 ~ span {
+	color: #0a0a0a;
+	font-size: 12px;
+	transform: translateY(-20px);
+}
+
+.regForm .inputBox input[type="submit"] {
+	width: 100px;
+	background: #fccc04;
+	color: #070707;
+	font-weight: 500;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+	font-size: 18px;
+}
+
+.loginForm {
+	max-width: 25rem;
+	max-height: 33rem;
+	padding: 40px;
+	background: #ffffff;
+	opacity: 90%;
+	border-radius: 15px;
+	margin: auto;
+}
+
+.loginForm h2 {
+	font-size: 30px;
+	color: #333;
+	font-weight: 500;
+}
+
+.loginForm .inputBox {
+	position: relative;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.loginForm .inputBox input, .loginForm .inputBox textarea {
+	width: 100%;
+	padding: 5px 0;
+	font-size: 16px;
+	margin: 10px 0;
+	border: none;
+	border-bottom: 2px solid #333;
+	outline: none;
+	resize: none;
+}
+
+.loginForm .inputBox span {
+	position: absolute;
+	left: 0;
+	padding: 5px 0;
+	font-size: 16px;
+	margin: 10px 0;
+	pointer-events: none;
+	transition: 0.5s;
+	color: #666;
+}
+
+.loginForm .inputBox input:focus ~ span, .loginForm .inputBox input:valid 
+	 ~ span, .loginForm .inputBox textarea:focus ~ span, .loginForm .inputBox textarea:valid 
+	 ~ span {
+	color: #0a0a0a;
+	font-size: 12px;
+	transform: translateY(-20px);
+}
+
+.loginForm .inputBox input[type="submit"] {
+	width: 100px;
+	background: #fccc04;
+	color: #070707;
+	font-weight: 500;
+	border: none;
+	cursor: pointer;
+	padding: 10px;
+	font-size: 18px;
+}
+
+.error {
+	font-size: .8rem !important;
+	color: #f55 !important;
+	position: absolute;
+	top: -20px;
+	left: 0;
+}

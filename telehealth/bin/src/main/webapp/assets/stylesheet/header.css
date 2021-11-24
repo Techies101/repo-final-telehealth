@@ -1,0 +1,109 @@
+body {
+	height: 100vh;
+}
+
+* {
+	box-shadow: none !important;
+}
+
+.custom_btn-background-blue {
+	background-color: #1c87c9 !important;
+	color: #fff !important;
+	font-weight: 600 !important;
+}
+
+/*
+===============================
+Nav Style
+===============================
+*/
+.logo {
+	color: #1c87c9;
+}
+
+.systemName {
+	font-size: 3rem !important;
+}
+
+.btn-login{
+    border-width: 3px;
+    border-radius: 20px;
+    border-color: #1c87c9;
+    padding-left: 20px;
+    padding-right:20px;
+    font-weight: 600;
+  }
+  .btn-login:hover{
+    background-color:#1c87c9 ;
+    color: white;
+   
+  }
+
+div.navigation {
+	background-color: #fdfdfdea;
+}
+
+.center {
+	text-align: center;
+}
+
+.nav-link {
+	color: #000 !important;
+	font-weight: 500;
+}
+
+.active {
+	color: #1c87c9 !important;
+	font-weight: 600;
+}
+
+.nav-link:hover {
+	color: #1c87c9 !important;
+}
+
+.nav-link:active {
+	color: #000;
+}
+
+.nav-link:focus {
+	color: #1c87c9;
+}
+
+.nav-item a {
+	color: #666;
+	display: inline-block;
+	margin: 0;
+}
+
+.nav-item a:after {
+	display: block;
+	content: '';
+	border-bottom: solid 3px #1c87c9;
+	transform: scaleX(0);
+	transition: transform 250ms ease-in-out;
+}
+
+.nav-item a:hover:after {
+	transform: scaleX(1);
+}
+
+.nav-item a.fromRight:after {
+	transform-origin: 100% 50%;
+}
+
+h1.fromLeft:after {
+	transform-origin: 0% 50%;
+}
+
+.icon-button {
+	position: relative;
+	border-radius: 50%;
+	height: 45px;
+	color: #333;
+	border: none;
+	outline: none;
+	width: 45px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
