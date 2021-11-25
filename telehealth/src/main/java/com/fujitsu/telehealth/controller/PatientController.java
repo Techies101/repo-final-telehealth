@@ -2,7 +2,12 @@ package com.fujitsu.telehealth.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import java.security.SecureRandom;
+
 import java.sql.SQLException;
+
+import java.util.Base64;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,9 +27,11 @@ import com.fujitsu.telehealth.dao.ImageListDAO;
 import com.fujitsu.telehealth.model.AppRequestByPatient;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
+import com.fujitsu.telehealth.model.HtmlTemplate;
 import com.fujitsu.telehealth.model.LabModel;
 import com.fujitsu.telehealth.model.LoginModel;
 import com.fujitsu.telehealth.model.PatientModel;
+import com.fujitsu.telehealth.model.SendMail;
 
 public class PatientController {
 
@@ -33,6 +40,8 @@ public class PatientController {
 	ImageDAO imageDao = new ImageDAO();
 	Image2DAO imageDao2 = new Image2DAO();
 	ImageListDAO imageListDao = new ImageListDAO();
+	HtmlTemplate template = new HtmlTemplate();
+	SendMail mail = new SendMail();
 
 	// Page Dispatcher
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
@@ -70,7 +79,7 @@ public class PatientController {
 		String email = request.getParameter("email");
 		if (AppPatientImpl.checkUserExist(email)) {
 			responseText(response, "error");
-		}else {
+		} else {
 			responseText(response, "success");
 		}
 	}
@@ -79,13 +88,12 @@ public class PatientController {
 	public void userLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
 		String th_email = request.getParameter("th_email").trim();
 		String th_password = request.getParameter("th_password").trim();
 		LoginModel user = new LoginModel(th_email, th_password);
 		PatientModel userInfo = AppPatientImpl.validate(user);
-		HttpSession session = request.getSession();
-		String uid = null;
-		uid = (String) session.getAttribute("uid");
 
 		if (userInfo != null) {
 			if (uid == null) {
@@ -104,9 +112,18 @@ public class PatientController {
 
 	}
 
+	public static String createToken() {
+		SecureRandom secureRandom = new SecureRandom();
+		Base64.Encoder base64Encoder = Base64.getUrlEncoder();
+		byte[] randomBytes = new byte[32];
+		secureRandom.nextBytes(randomBytes);
+		return base64Encoder.encodeToString(randomBytes);
+	}
+
 	// Create new User
 	public void createNewUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
+		HttpSession session = request.getSession();
 
 		// Get the value from each parameter
 		String th_email = request.getParameter("th_email").trim();
@@ -119,22 +136,73 @@ public class PatientController {
 		String th_password = request.getParameter("th_password").trim();
 		String th_condition = request.getParameter("th_condition");
 		String th_address = request.getParameter("th_address");
-
 		String th_patientID = new PatientModel().getTh_patientID() + Integer.parseInt(generateUniqueID());
+		String th_bday = request.getParameter("th_bday");
+
 		PatientModel userInfo = new PatientModel(th_patientID, th_email, th_first_name, th_middle_name, th_last_name,
-				th_address, th_age, th_gender, th_contact, th_password, th_condition);
+				th_address, th_age, th_gender, th_contact, th_password, th_condition, th_bday);
 
 		if (AppPatientImpl.createNewUser(userInfo)) {
+			String token = createToken().replace("=", "");
+			session.setAttribute("verificationToken", token);
+			session.setAttribute("email", userInfo.getTh_email());
+			template.setHtmlContent(token, userInfo.getTh_fname() + " " + userInfo.getTh_lname());
+			mail.setUserEmail(userInfo.getTh_email());
+			mail.sendEmail(template.getHtmlContent(), "onlinetelehealthservices@gmail.com", "Fujitsu2021!");
 			responseText(response, "success");
 		} else {
 			responseText(response, "error");
 		}
 	}
 
+	public void verifyToken(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		HttpSession session = request.getSession();
+		String userToken = request.getParameter("token");
+		String userEmail = (String) session.getAttribute("email");
+		String verificationToken = (String) session.getAttribute("verificationToken");
+		if (userToken.equals(verificationToken)) {
+			if (AppPatientImpl.updateUserStatus(userEmail)) {
+				session.setAttribute("valid", "true");
+				session.invalidate();
+			}
+		} else {
+			System.out.println("Invalid Token");
+		}
+	}
+
+	public void patientDashboard(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException, SQLException {
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		String role = (String) session.getAttribute("role");
+
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+		if (role.equals("doctor")) {
+			response.sendRedirect("doctor-dashboard.jsp");
+			return;
+		}
+
+		List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
+		request.setAttribute("listPatient", listPatient);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
+		dispatcher.forward(request, response);
+	}
+
 	// Get Profile Info
 	public void accountInfo(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+
 		String email = (String) session.getAttribute("email");
 		PatientModel userInfo = AppPatientImpl.getUserInfo(email);
 		request.setAttribute("myinfo", userInfo);
@@ -156,8 +224,9 @@ public class PatientController {
 		String th_contact = request.getParameter("th_contact").replace(" ", "");
 		String th_password = request.getParameter("th_password");
 		String th_condition = request.getParameter("th_condition");
-		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address, th_age,
-				th_gender, th_contact, th_password, th_condition);
+		String th_bday = request.getParameter("th_bday");
+		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,
+				th_age, th_gender, th_contact, th_password, th_condition, th_bday);
 
 		if (AppPatientImpl.updateAccount(userInfo)) {
 			responseText(response, "success");
@@ -178,12 +247,18 @@ public class PatientController {
 		String date = request.getParameter("datee");
 		String time = request.getParameter("time");
 		String condition = request.getParameter("condition");
+<<<<<<< HEAD
 		String did = request.getParameter("did");
 		AppRequestByPatient appRequest = new AppRequestByPatient(doctor, fullname, date, time, "Pending", condition, uid, did, "True");
 		
 		AppRequestByPatient appRequest2 = new AppRequestByPatient(date, time, uid, "True", doctor);
 		AppPatientImpl.requestTime(appRequest2);
 		
+=======
+
+		AppRequestByPatient appRequest = new AppRequestByPatient(doctor, fullname, date, time, condition, uid);
+
+>>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 		if (AppPatientImpl.requestAppointment(appRequest)) {
 			responseText(response, "success");
 		} else {
@@ -215,12 +290,23 @@ public class PatientController {
 	// List Request
 	public void listRequest(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
 		String selected = request.getParameter("dropdown");
+		String role = (String) session.getAttribute("role");
 		
-		if(selected == null) {
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}else {
+			if (role.equals("doctor")) {
+				response.sendRedirect("doctor-dashboard");
+				return;
+			}
+		}
+
+		if (selected == null) {
 			selected = "All";
 		}
 
@@ -246,7 +332,6 @@ public class PatientController {
 
 	public void uploadImage(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ClassNotFoundException {
-
 		int id = Integer.parseInt(request.getParameter("imageId"));
 		Part part = request.getPart("image");
 		imageDao.paymentImage(id, part);
@@ -283,19 +368,34 @@ public class PatientController {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
 		dispatcher.forward(request, response);
 	}
-	
+
 	// List of Patient
 	public void listPatient(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
-		request.setAttribute("listPatient", listPatient);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
-		dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		} else {
+			List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
+			request.setAttribute("listPatient", listPatient);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	// Details of Patient
 	public void detailsPatient(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
 		PatientModel detailsPatient = AppDoctorImpl.selectPatient(request.getParameter("id"));
 		request.setAttribute("detailsPatient", detailsPatient);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-details.jsp");
@@ -314,13 +414,9 @@ public class PatientController {
 	// Laboratory History of Patient
 	public void patientLaboratory(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		String th_uid = (String)session.getAttribute("uid");
-		List<LabModel> patientLaboratory = imageListDao.labImageList(th_uid);
+		List<LabModel> patientLaboratory = imageListDao.labImageList(request.getParameter("id"));
 		request.setAttribute("patientLaboratory", patientLaboratory);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-laboratory-history.jsp");
-		dispatcher.forward(request, response);
-
+		dispatcher("patient-laboratory-history.jsp", request, response);
 	}
 
 	// Laboratory History of Patient (Patient Side)
@@ -328,6 +424,12 @@ public class PatientController {
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
+
+		if (uid == null) {
+			response.sendRedirect("login");
+			return;
+		}
+
 		List<LabModel> patientLab = AppDoctorImpl.labImageList(uid);
 		request.setAttribute("patientLab", patientLab);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-history.jsp");
@@ -343,8 +445,8 @@ public class PatientController {
 		imageDao2.labImage(uid, part);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
 		dispatcher.forward(request, response);
-		// response.sendRedirect("/TelehealthService/patient-list.jsp");
 	}
+<<<<<<< HEAD
 	
 	// Display Schedule
 	public void displaySchedule(HttpServletRequest request, HttpServletResponse response)
@@ -384,3 +486,6 @@ public class PatientController {
 	}
 
 }
+=======
+}
+>>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git

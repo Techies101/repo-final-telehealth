@@ -31,4 +31,5 @@ public interface AppPatientInterface {
 
 	boolean addSchedule(AppRequestByPatient requestInfo) throws SQLException;
 	
+	boolean updateUserStatus(String th_email) throws SQLException;
 }

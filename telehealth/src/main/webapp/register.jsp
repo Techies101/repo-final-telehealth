@@ -10,8 +10,6 @@
 <%@include file="includes/_linkshead.jsp"%>
 <link rel="stylesheet" href="assets/stylesheet/header.css">
 <link rel="stylesheet" href="assets/stylesheet/register.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
@@ -36,27 +34,22 @@
 
 						<div class="inputBox col">
 							<input type="text" name="th_first_name" required="required"
-								id="fname">
-							<span>Patient's First Name</span>
+								id="fname"> <span>Patient's First Name</span>
 						</div>
 
 						<div class="inputBox col">
 							<input type="text" name="th_middle_name" required="required"
-								id="mname">
-							<span>Patient's Middle Name</span>
+								id="mname"> <span>Patient's Middle Name</span>
 						</div>
 
 						<div class="inputBox col">
 							<input type="text" name="th_last_name" required="required"
-								id="lname">
-							<span>Patient's Last Name</span>
+								id="lname"> <span>Patient's Last Name</span>
 						</div>
-
 						<div class="inputBox col">
-							<input type="text" name="th_age" required="required" id="age"
-								onkeypress="return /[0-9]/i.test(event.key)"
-								onkeyup="return calcAge(this)"> <span>Age</span>
-							<p id="errorAge" class="error-text"></p>
+							<input name="th_bday" type="datetime-local" class="form-control"
+								placeholder="Select Date of Birth" required />
+
 						</div>
 
 						<div class="inputBox col">
@@ -123,9 +116,6 @@
 		</div>
 	</div>
 
-
-
-
 	<script
 		src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="assets/js/cleave.min.js"></script>
@@ -134,6 +124,15 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script type="text/javascript" src="assets/js/modal.js"></script>
 	<script type="text/javascript" src="assets/js/utils.js"></script>
+	<script>
+		dateConfig = {
+			maxDate : "2021-11",
+			dateFormat : "F d, Y"
+		}
+
+		flatpickr("input[name=th_bday]", dateConfig);
+	</script>
+
 </body>
 
 </html>

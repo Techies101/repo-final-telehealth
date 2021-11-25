@@ -20,17 +20,6 @@ type="text/css">
 </head>
 
 <body>
-
-<%
-	String uid = (String) session.getAttribute("uid");
-	String role = (String) session.getAttribute("role");
-		if (uid == null) 
-			response.sendRedirect("login");
-		
-		if (role.equals("doctor")) 
-			response.sendRedirect("doctor-dashboard.jsp");
-%>
-	
 	<%@include file="includes/_header.jsp"%>
 	<div class="card_wrapper mt-4">
 		<div class="container border pb-3 pt-5">
@@ -75,9 +64,14 @@ type="text/css">
 								</script>
 								
 					    		</c:if>
+<<<<<<< HEAD
 					        
 					    </c:forEach>	
 					    				
+=======
+					    </c:forEach>		
+					    			
+>>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 					</select>
 							<input type="hidden" name="did" value="<%=request.getParameter("did")%>" />
 							<input type="hidden" name="datee" value="<%=request.getParameter("date")%>" />

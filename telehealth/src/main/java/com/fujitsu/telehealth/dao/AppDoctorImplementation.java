@@ -5,9 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+=======
+import java.text.ParseException;
+>>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +19,10 @@ import java.util.List;
 import com.fujitsu.telehealth.model.AppointmentModel;
 import com.fujitsu.telehealth.model.AppointmentModel2;
 import com.fujitsu.telehealth.model.LabModel;
+import com.fujitsu.telehealth.model.NotificationModel;
 import com.fujitsu.telehealth.model.PatientModel;
 import com.fujitsu.telehealth.utils.DBConnection;
+import com.fujitsu.telehealth.utils.NotifBackgroundTask;
 import com.fujitsu.telehealth.utils.SQLQuery;
 
 public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterface {
@@ -280,7 +286,6 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 			preparedStatement.setString(1, uid);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				String th_patientid = rs.getString("th_patientid");
 				String th_email = rs.getString("th_email");
 				String th_fname = rs.getString("th_fname");
 				String th_middle_name = rs.getString("th_middle_name");
@@ -290,7 +295,7 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				String th_gender = rs.getString("th_gender");
 				String th_contact = rs.getString("th_contact");
 				String th_conditon = rs.getString("th_condition");
-				tbl_patient = new PatientModel(th_patientid, th_email, th_fname, th_middle_name, th_lname, th_address,
+				tbl_patient = new PatientModel(th_email, th_fname, th_middle_name, th_lname, th_address,
 						th_age, th_gender, th_contact, th_conditon, uid);
 			}
 		} catch (SQLException e) {
@@ -357,5 +362,30 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 		}
 		return lab;
 	}
+
+	@Override
+	public NotificationModel getSchedule(String th_did) throws SQLException, ParseException {
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement stmt = con.prepareStatement(SELECT_SCHEDULE_BY_DOCTOR);
+			stmt.setString(1, th_did);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				String appointment_time = rs.getString("th_time");
+				String appointment_date = rs.getString("th_date");
+//				String doctor = rs.getString("th_doctor");
+				System.out.println(NotifBackgroundTask.getTimeDiff(appointment_time, appointment_date));
+			}
+			
+		}catch (SQLException sqlex) {
+			DBConnection.printSQLException(sqlex);
+		}
+		
+		return null;
+	}
+	
+	
 
 }
