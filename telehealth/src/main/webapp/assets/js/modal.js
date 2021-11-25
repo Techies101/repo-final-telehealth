@@ -1,4 +1,4 @@
-const modalAlert = (res, message, text = '') => {
+const modal = (res, message, text = '') => {
 	Swal.fire({
 		icon: res,
 		title: message,

@@ -116,7 +116,6 @@
 									value="" 
 									class="form-control"
 									name=condition required="required" > <c:out value='${myinfo.th_condition}' />
-									
 								</textarea>
 							</div>
 						

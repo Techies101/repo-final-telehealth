@@ -49,11 +49,8 @@ public class Encryption {
 		// method to encrypt the password using the original password and salt value.
 		public static String generateSecurePassword(String password, String salt) {
 			String finalval = null;
-
 			byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
-
 			finalval = Base64.getEncoder().encodeToString(securePassword);
-
 			return finalval;
 		}
 
@@ -64,7 +61,6 @@ public class Encryption {
 			String newSecurePassword = generateSecurePassword(providedPassword, salt);  
 			// check if two passwords are equal
 			finalval = newSecurePassword.equalsIgnoreCase(securedPassword);  
-	          
 	        return finalval;  
 	    }  
 	}

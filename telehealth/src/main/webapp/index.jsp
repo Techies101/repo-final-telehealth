@@ -8,6 +8,7 @@
 <%@include file="./includes/_linkshead.jsp"%>
 <link rel="stylesheet" href="assets/stylesheet/landingpage.css">
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 </head>
 <body>
 
@@ -55,6 +56,7 @@
 						})
 
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script type="text/javascript" src="assets/js/notif.js"></script>
 </body>
 

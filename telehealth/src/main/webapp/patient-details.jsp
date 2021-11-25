@@ -19,46 +19,15 @@
 <body>
 	
 	<%@include file="includes/_header.jsp" %>
-	<!-- account -->
-	<!--<div class="container-search ">
-		<div class="patient-details">
-			<h4 class="text-left border-bottom">Account Information</h4>
-				<tr>
-					<th>First name:</th>
-					<td><c:out value="${detailsPatient.th_fname}" /></td>
-					<br>
-					<th>Middle Name:</th>
-					<td><c:out value="${detailsPatient.th_middle_name}" /></td>
-					<br>
-					<th>Last Name:</th>
-					<td><c:out value="${detailsPatient.th_lname}" /></td>
-					<br>
-					<th>Age:</th>
-					<td><c:out value="${detailsPatient.th_age}" /></td>
-					<br>
-					<th>Gender:</th>
-					<td><c:out value="${detailsPatient.th_gender}" /></td>
-					<br>
-					<th>Address:</th>
-					<td><c:out value="${detailsPatient.th_address}" /></td>
-					<br>
-					<th>Email:</th>
-					<td><c:out value="${detailsPatient.th_email}" /></td>
-					<br>
-					<th>Contact Number:</th>
-					<td><c:out value="${detailsPatient.th_contact}" /></td>
-				</tr>
-		</div>
-	</div>-->	
-	<br>
 	<div class="container rounded bg-white mt-3 mb-5  ">
 		<div class="container updateform">
 			<div class="row">
 				<div class="col-md-3 col-sm- 12 border border-right bgblue ">
 					<div class="d-flex flex-column align-items-center text-center p-3 py-5 white">
 						<i class="fas fa-user-circle fa-6x mt-3 "></i>
-						<p> <label> <c:out value='${myinfo.th_fname}' /> </label> <br> 
-							<label> <c:out value='${myinfo.th_email}' /> </label></p>
+						<p> <label> <c:out value='${detailsPatient.th_email}' /> </label> <br> 
+							<label> <c:out value='${detailsPatient.th_fname}' /> </label></p>
+							<label> <c:out value='${detailsPatient.th_uid}' /> </label></p>
 					</div>
 				</div>
 				<div class="col-md-8  col-sm- 12 mx-auto border-right">
@@ -117,8 +86,6 @@
 								type="text" value="<c:out value='${detailsPatient.th_contact}' />"
 								class="form-control">
 							</div>
-
-
 						</div>
 					</div>
 					</div>

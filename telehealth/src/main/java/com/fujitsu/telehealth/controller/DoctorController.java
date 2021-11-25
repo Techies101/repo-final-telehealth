@@ -40,12 +40,13 @@ public class DoctorController {
 		if (uid == null)  {
 			response.sendRedirect("login");
 			return;
+		}else {
+			if (role.equals("patient")) {
+				response.sendRedirect("doctor-dashboard");
+				return;
+			}
 		}
 			
-		if (role.equals("patient")) {
-			response.sendRedirect("patient-dashboard");
-			return;
-		}
 		
 		if(selected == null) {
 			selected = "All";
@@ -103,25 +104,31 @@ public class DoctorController {
 	// Notification
 	public void reminder(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException, ParseException {
-		
 		HttpSession session = request.getSession();
 		String th_duid = session.getAttribute("th_uid").toString();
-		JsonObject json = new JsonObject();
-		NotificationModel notifModel = new NotificationModel();
-		PrintWriter writer = response.getWriter();
+//		JsonObject json = new JsonObject();
+//		NotificationModel notifModel = new NotificationModel();
+//		PrintWriter out = response.getWriter();
+//		notifModel = appDao.getSchedule(th_duid);
+		System.out.println("Hello World!");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setStatus(HttpServletResponse.SC_OK);
+//		json.put("doctor", notifModel.getDoctor());
+//		json.put("time", notifModel.getDate());
+//		json.put("time", notifModel.getTime());
+//		
+//		out.print(json.toJson());
 		
-		notifModel = appDao.getSchedule(th_duid);
-		
-		if ( notifModel != null ) {
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.setStatus(HttpServletResponse.SC_OK);
-			json.put("doctor", notifModel.getDoctor());
-			json.put("time", notifModel.getDate());
-			json.put("time", notifModel.getTime());
-			writer.print(json);
-			writer.flush();
-		}
-		
+//		if ( notifModel != null ) {
+//			response.setContentType("application/json");
+//			response.setCharacterEncoding("UTF-8");
+//			response.setStatus(HttpServletResponse.SC_OK);
+//			json.put("doctor", notifModel.getDoctor());
+//			json.put("time", notifModel.getDate());
+//			json.put("time", notifModel.getTime());
+//			writer.print(json.toString());
+//			writer.flush();
+//		}
+//		
 	}
 }

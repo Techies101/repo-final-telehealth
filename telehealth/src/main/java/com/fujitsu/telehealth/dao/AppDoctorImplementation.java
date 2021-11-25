@@ -160,7 +160,6 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 			preparedStatement.setString(1, uid);
 			ResultSet rs = preparedStatement.executeQuery();
 			while (rs.next()) {
-				String th_patientid = rs.getString("th_patientid");
 				String th_email = rs.getString("th_email");
 				String th_fname = rs.getString("th_fname");
 				String th_middle_name = rs.getString("th_middle_name");
@@ -170,7 +169,7 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				String th_gender = rs.getString("th_gender");
 				String th_contact = rs.getString("th_contact");
 				String th_conditon = rs.getString("th_condition");
-				tbl_patient = new PatientModel(th_patientid, th_email, th_fname, th_middle_name, th_lname, th_address,
+				tbl_patient = new PatientModel(th_email, th_fname, th_middle_name, th_lname, th_address,
 						th_age, th_gender, th_contact, th_conditon, uid);
 			}
 		} catch (SQLException e) {

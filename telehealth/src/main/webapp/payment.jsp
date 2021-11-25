@@ -24,7 +24,7 @@
             	<a href="https://getpaid.gcash.com/checkout/31556b99afca39a97c0522c138007a7e?testmode=true" target="_blank">
                 <div class="col-md-6 col-sm-12">
                   <div class="card dgm">
-                    <img class="digital-method" src="./img/gcash.png">
+                    <img class="digital-method" src="./img/GCash-logo.jpg">
                   </div>
                   </a>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="col-md-6 col-sm-12">
                   <a href="https://www.paypal.com/myaccount/transfer/homepage" target="_blank">
                   <div class="card dgm">
-                    <img class="digital-method" src="./img/paypal.png">
+                    <img class="digital-method" src="./img/paypal-logo.png">
                   </div>
                   </a>
                 </div>

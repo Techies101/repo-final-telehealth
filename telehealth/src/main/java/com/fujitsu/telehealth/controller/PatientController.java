@@ -265,10 +265,16 @@ public class PatientController {
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
 		String selected = request.getParameter("dropdown");
-
+		String role = (String) session.getAttribute("role");
+		
 		if (uid == null) {
 			response.sendRedirect("login");
 			return;
+		}else {
+			if (role.equals("doctor")) {
+				response.sendRedirect("doctor-dashboard");
+				return;
+			}
 		}
 
 		if (selected == null) {
@@ -339,7 +345,6 @@ public class PatientController {
 			response.sendRedirect("login");
 			return;
 		}
-
 		PatientModel detailsPatient = AppDoctorImpl.selectPatient(request.getParameter("id"));
 		request.setAttribute("detailsPatient", detailsPatient);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-details.jsp");
@@ -358,13 +363,9 @@ public class PatientController {
 	// Laboratory History of Patient
 	public void patientLaboratory(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, ClassNotFoundException, SQLException {
-		HttpSession session = request.getSession();
-		String th_uid = (String) session.getAttribute("uid");
-		List<LabModel> patientLaboratory = imageListDao.labImageList(th_uid);
+		List<LabModel> patientLaboratory = imageListDao.labImageList(request.getParameter("id"));
 		request.setAttribute("patientLaboratory", patientLaboratory);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-laboratory-history.jsp");
-		dispatcher.forward(request, response);
-
+		dispatcher("patient-laboratory-history.jsp", request, response);
 	}
 
 	// Laboratory History of Patient (Patient Side)

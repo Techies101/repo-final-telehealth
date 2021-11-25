@@ -20,6 +20,9 @@ public class PatientModel {
 	private String code;
 
 	public PatientModel() {}
+	
+	
+
 
 	public PatientModel(String th_patientID, String th_email, String th_contact, String th_fullname, String th_uid) {
 		super();
@@ -48,8 +51,11 @@ public class PatientModel {
 		this.role = th_role;
 	}
 	
+	
+
+
 	public PatientModel(String th_email, String th_fname, String th_middle_name, String th_lname, String th_address,
-			String th_age, String th_gender, String th_contact, String th_condition, String th_uid,String th_bday) {
+			String th_age, String th_gender, String th_contact, String th_fullname, String th_uid) {
 		super();
 		this.th_email = th_email;
 		this.th_fname = th_fname;
@@ -59,10 +65,11 @@ public class PatientModel {
 		this.th_age = th_age;
 		this.th_gender = th_gender;
 		this.th_contact = th_contact;
-		this.th_condition = th_condition;
+		this.th_fullname = th_fullname;
 		this.th_uid = th_uid;
-		this.th_bday = th_bday;
 	}
+
+
 
 
 	public PatientModel(String th_email, String th_fname, String th_middle_name, String th_lname, String th_address,
