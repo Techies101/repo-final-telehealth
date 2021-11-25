@@ -291,7 +291,6 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 		    	time2 = newTime2;
 
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
