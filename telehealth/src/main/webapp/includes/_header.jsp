@@ -29,6 +29,8 @@
 					<li class="nav-item"><a href="account-info" class="nav-link px-2 ">Account</a></li>
 				</c:when>
 				<c:when test="${role == 'doctor'}">
+					<li class="nav-item"><a href="doctor-schedule"
+				class="nav-link px-2 actived  ">Schedule</a></li>
 					<li class="nav-item"><a href="doctor-dashboard"
 				class="nav-link px-2 actived  ">Appointment</a></li>
 				<li class="nav-item"><a href="list" class="nav-link px-2 ">Patient List</a></li>

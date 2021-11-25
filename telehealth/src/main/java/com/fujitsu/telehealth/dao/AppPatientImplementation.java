@@ -5,7 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fujitsu.telehealth.model.AppRequestByPatient;
@@ -191,17 +195,20 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 			con = DBConnection.connect();
 			PreparedStatement stmt;
 			
-			String parts[] = requestInfo.getTh_doctor().split(" ", 2);
-			
+			//String parts[] = requestInfo.getTh_doctor().split(" ", 2);
+			//stmt.setString(1, String.format("%s", parts[1]));
+
 			stmt = con.prepareStatement(SQL_REQUEST_APPOINTMENT);
-			stmt.setString(1, String.format("%s", parts[1]));
+			stmt.setString(1, requestInfo.getTh_doctor());
 			stmt.setString(2, requestInfo.getTh_patient_name());
 			stmt.setString(3, requestInfo.getTh_date());
 			stmt.setString(4, requestInfo.getTh_time());
 			stmt.setString(5, "Pending");
 			stmt.setString(6, requestInfo.getTh_comment());
 			stmt.setString(7, requestInfo.getTh_uid());
-			stmt.setString(8, String.format("%s", parts[0]));
+			stmt.setString(8, requestInfo.getTh_did());
+			//stmt.setString(9, requestInfo.getTh_taken());
+			
 			int rs = stmt.executeUpdate();
 			result = rs > 0;
 		} catch (SQLException ex) {
@@ -212,7 +219,88 @@ public class AppPatientImplementation extends SQLQuery implements AppPatientInte
 
 		return result;
 	}
+	
+	public boolean requestTime(AppRequestByPatient requestInfo) throws SQLException {
 
+		boolean result = false;
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement stmt;
+
+			stmt = con.prepareStatement(SQL_UPDATE_TIME);
+			stmt.setString(1, "True");
+			stmt.setString(2, requestInfo.getTh_date());
+			stmt.setString(3, requestInfo.getTh_time());
+			System.out.println("Doctor Scheduled Time Updated");
+			int rs = stmt.executeUpdate();
+			result = rs > 0;
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public boolean addSchedule(AppRequestByPatient requestInfo) throws SQLException {
+
+		boolean result = false;
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement stmt;
+			
+		    Date date = null;
+		    Date date2 = null;
+		    String newTime = null;
+		    String newTime2 = null;
+		    
+			String time = requestInfo.getTh_time();
+			String time2 = requestInfo.getTh_date();
+			
+		    DateFormat df = new SimpleDateFormat("HH:mm");
+		    DateFormat df2 = new SimpleDateFormat("yyyy-MM-dd");
+		    
+		    DateFormat of = new SimpleDateFormat("hh:mm aa");
+		    DateFormat of2 = new SimpleDateFormat("YYYY-MM-dd");
+
+			
+			try {
+				date= df.parse(time);
+				date2= df2.parse(time2);
+				
+		    	newTime = of.format(date);
+		    	newTime2 = of2.format(date2);
+		    	
+		    	time = newTime;
+		    	time2 = newTime2;
+
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			stmt = con.prepareStatement(SQL_ADD_SCHEDULE);
+			stmt.setString(1, requestInfo.getTh_uid());
+			stmt.setString(2, newTime);
+			stmt.setString(3, newTime2);
+			System.out.println("heee" +newTime+newTime2);
+			int rs = stmt.executeUpdate();
+			result = rs > 0;
+			
+
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+
+		return result;
+	}
+	
 	@Override
 	public List<AppointmentModel2> requestedAppointment(String th_uid) throws SQLException {
 		List<AppointmentModel2> listRequest = new ArrayList<>();

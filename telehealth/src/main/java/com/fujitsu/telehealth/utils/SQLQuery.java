@@ -14,13 +14,19 @@ public class SQLQuery {
 	public static final String SQL_UPDATE_ACCOUNT_SQL = "UPDATE uIOZfQ2T0j.tbl_patient SET th_email=?, th_fname=?, th_middle_name=?, th_lname=?, th_address=?, th_age=?, th_gender=?, th_contact=?, th_password=?, th_condition=? WHERE th_uid=?";
 
 	public static final String SQL_REQUEST_APPOINTMENT = "INSERT INTO tbl_appointment(th_doctor, th_patient, th_date, th_time, th_status, th_comment, th_uid, th_did) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String SQL_UPDATE_TIME = "UPDATE tbl_schedule set th_taken=? WHERE th_date=? AND th_time= ?";
 	public static final String SELECT_ALL_APPOINTMENT_BY_PATIENT = "SELECT th_doctor, th_patient, th_date, th_time, th_status, th_link, th_comment, th_remarks, th_id, th_image FROM tbl_appointment WHERE th_uid=?";
 	public static final String SQL_UPLOAD_PROOF_PAYMENT = "UPDATE uIOZfQ2T0j.tbl_appointment set th_image=? where th_id= ?";
 
 	// DOCTOR SIDE QUERY
 	public static final String SQL_SELECT_APPOINTMENT = "SELECT * FROM tbl_appointment WHERE th_did=?";
+	public static final String SQL_SELECT_SCHEDULE_APPOINTMENT = "SELECT * FROM tbl_appointment WHERE th_did=? AND th_date=?";
+	public static final String SQL_SELECT_SCHEDULE = "SELECT * FROM tbl_schedule WHERE th_uid=?";
+	public static final String SQL_SELECT_TIME = "SELECT * FROM tbl_schedule WHERE th_uid=? AND th_date=?";
+	public static final String SQL_ADD_SCHEDULE = "INSERT uIOZfQ2T0j.tbl_schedule (th_uid, th_time, th_date) values (?,?,?)";
 	public static final String SQL_UPDATE_LINK = "UPDATE tbl_appointment SET th_link=? WHERE th_id= ?";
 	public static final String SQL_DROP_MEETING = "UPDATE tbl_appointment SET th_status='Declined', th_comment=? WHERE th_id=?";
+	public static final String SQL_DROP_SCHEDULE = "DELETE FROM tbl_schedule WHERE th_id=?";
 	public static final String SQL_PENDING_STATUS = "UPDATE tbl_appointment set th_status='Payment' where th_id=?";
 	public static final String SQL_PAYMENT_STATUS = "UPDATE tbl_appointment set th_status='Done' where th_id= ?";
 	public static final String SQL_UPLOAD_LAB_HISTORY = "INSERT uIOZfQ2T0j.tbl_lab (th_uid, th_image, th_date, th_time) values (?,?,?,?)";

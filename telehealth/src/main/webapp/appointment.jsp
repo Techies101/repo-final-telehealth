@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,27 +40,70 @@ type="text/css">
 			
 			<form class="form_appointment" action="book-appointment" id="form-appointment">
 				<div class="input-group mb-3">
-					<select name="doctor" class="form-select" id="inputGroupSelect01" required>
+				
+					<select name="docname" class="form-select" id="inputGroupSelect01" required>
 					
-						<option selected disabled>Find Doctor</option>
-											    
+					<c:if test="${param.docname == null}">
+					<option  selected="selected" disabled>Find Doctor</option>
+					</c:if>
+					
+					<c:if test="${param.docname != null}">
+					<option  selected="selected" value="<%=request.getParameter("docname")%>">Dr. <%=request.getParameter("docname")%></option>
+					</c:if>			    
+					
 					    <c:forEach items="${listPatient}" var="a">
 					    		<c:if test="${a.role == 'doctor'}">
 					            <option value="${a.th_uid} ${a.th_fullname}">Dr. ${a.th_fullname}</option>
+					            
+					            <script>
+								function reload()
+								{
+									let text = document.getElementById('inputGroupSelect01').value;
+									let date = document.getElementById('inputGroupSelect05').value;
+									var uid = "<%= session.getAttribute( "uid" ) %>";
+
+									const myArray = text.split(" ", 1);
+									const myArray2 = text.substr(text.indexOf(" ") + 1);;
+									//const myArray2 = Arrays.toString(text.split(" ", 2));
+											
+									var doc = myArray;
+									var doc2 = myArray2;
+									//var docname = myArray2;
+									self.location='listdocsched?did='+doc+'&date='+date+'&uid='+uid+'&docname='+doc2
+								}
+															
+								</script>
+								
 					    		</c:if>
 					        
-					    </c:forEach>					
+					    </c:forEach>	
+					    				
 					</select>
+							<input type="hidden" name="did" value="<%=request.getParameter("did")%>" />
+							<input type="hidden" name="datee" value="<%=request.getParameter("date")%>" />
 				</div>
 				
 				<div class="input-group mb-3">
-					<input name="date" type="datetime-local" class="form-control"
+					<input name="date" type="datetime-local" onChange="reload()" class="form-control" id="inputGroupSelect05" value="<%=request.getParameter("date")+"T13:00"%>"
 						placeholder="Select Date.." required />
 				</div>
 
 				<div class="input-group mb-3">
-					<input name="time" type="datetime-local" class="form-control"
-						placeholder="Select Time Availability.." required />
+
+					<select name="time" class="form-select" required>
+					
+						<option selected disabled>Select Time</option>
+						
+					    <c:forEach items="${schedule}" var="a">
+
+				   				<c:if test="${a.th_taken eq 'False'}">
+							    <option> ${a.th_time}</option>
+							    </c:if>
+							    
+					    </c:forEach>					
+					</select>
+					
+					
 				</div>
 
 				<div class="input-group mb-3">
@@ -80,8 +125,8 @@ type="text/css">
 	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 	<script>
 		dateConfig = {
-			minDate: "2021-01",
-			dateFormat: "F d, Y"
+			minDate: "today",
+			dateFormat: "Y-m-d"
 		}
 		timeConfig = {
 			noCalendar: true,
@@ -90,7 +135,7 @@ type="text/css">
 		}
 		flatpickr("input[name=date]", dateConfig);
 		flatpickr("input[name=time]", timeConfig);
-		
+		console.log(dateConfig)
 		$("#form-appointment").submit(function(e) {
 			e.preventDefault();
 			
@@ -109,6 +154,7 @@ type="text/css">
 						modal(result, "Appointment Booked Failed", "Please Try again");
 						$('input[type="text"],texatrea, select', this).val('');
 					}
+	    			location.reload()
 				}
 			})
 		})

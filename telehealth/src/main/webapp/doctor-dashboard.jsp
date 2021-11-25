@@ -10,7 +10,7 @@
 	
 	<%@include file="includes/_linkshead.jsp"%>
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
-	
+
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');	
@@ -51,9 +51,10 @@ table td{
 body {
 height: 100vh !important;
 }
-
 <%@include file="assets/stylesheet/main.css"%>
 </style>
+
+
 </head>
 <body>
 
@@ -69,7 +70,10 @@ height: 100vh !important;
 	
 	<%@include file="includes/_header.jsp"%>
 	<div class="container-search ">
+
+	
 		<form action="doctor-dashboard" class="py-3 d-flex" method="post">
+		
 		<select name="dropdown" id="list" class="form-select mr-2">
 			<option value="All"
 				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("All")) {%>
@@ -293,6 +297,6 @@ height: 100vh !important;
 		</tbody>
 	</table>
 </div>
-		
+
 </body>
 </html>

@@ -77,6 +77,22 @@ public class DoctorController {
 
 	}
 	
+	// Remove Scheduled Time
+	public void dropSchedule(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		int id = Integer.parseInt(request.getParameter("drop"));
+System.out.println(id);
+		if (appDao.dropSchedule(id)) {
+			//String dropdown = request.getParameter("dropdown");
+			//request.setAttribute("dropdown", dropdown);
+			dispatcher("doctor-schedule.jsp", request, response);
+		} else {
+			System.out.println("Drop Schedule failed!");
+		}
+
+	}
+	
 	//Approve Request 
 	public void approveMeeting(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {

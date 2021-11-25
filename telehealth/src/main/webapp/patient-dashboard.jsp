@@ -75,7 +75,7 @@ table td{
 		<form action="patient-dashboard" class="py-3 d-flex" method="post">
 		<select name="dropdown" id="list" class="form-select mr-2">
 			<option value="All" selected
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Pending")) {%>
+				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("All")) {%>
 				 <%}%>>All</option>
 			<option value="Pending"
 				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Pending")) {%>
