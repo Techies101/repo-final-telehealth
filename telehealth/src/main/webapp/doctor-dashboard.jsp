@@ -10,6 +10,50 @@
 	<%@include file="includes/_linkshead.jsp"%>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
+
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');	
+
+.swal2-input {
+	border: 1px !important;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    	background-color: #1c87c9 !important;
+    	font-family: 'Montserrat' !important;
+    	margin-left: .5rem;
+}
+.btn-danger{
+    	font-family: 'Montserrat' !important;
+    	margin-left: .5rem;
+}
+table td{
+	font-family: 'Montserrat', sans-serif !important;
+	
+}
+
+
+.container-search {
+	width: 60rem;
+	padding-top: 2rem;
+	margin: 0 auto;
+}
+
+#appointment th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #1c87c9;	
+	color: white;
+}
+
+body {
+height: 100vh !important;
+}
+<%@include file="assets/stylesheet/main.css"%>
+</style>
+
 	<link rel="stylesheet" href="assets/stylesheet/dashboard.css">
 </head>
 <body>
@@ -46,6 +90,7 @@
 	<div class="container col-lg-8">
 		<div class="table-responsive w-100 ">
 			<table id="appointment" class="table table-hover">
+			
 				<thead>
 					<tr>
 						<th>Patient</th>
@@ -55,6 +100,7 @@
 						<th>Action</th>
 					</tr>
 				</thead>
+				
 				<tbody>
 					<c:forEach var="a" items="${meeting}">
 						<c:if test="${dropdown == a.meetingStatus || dropdown == 'All'}">

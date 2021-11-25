@@ -50,7 +50,6 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 				// os.flush();
 				// os.close();
 				// Part image = rs.getInt("th_id");
-
 				meeting.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks, number,
 						blob));
 			}
@@ -62,7 +61,109 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 
 		return meeting;
 	}
+	
+	@Override
+	public List<AppointmentModel2> displayScheduleMeeting(String th_uid, String th_date) throws SQLException {
+		List<AppointmentModel2> meeting = new ArrayList<>();
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement preparedStatement;
+			preparedStatement = con.prepareStatement(SQL_SELECT_SCHEDULE_APPOINTMENT);
+			preparedStatement.setString(1, th_uid);
+			preparedStatement.setString(2, th_date);
+			int count = 0;
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				String doctor = rs.getString("th_doctor");
+				String patient = rs.getString("th_patient");
+				String date = rs.getString("th_date");
+				String time = rs.getString("th_time");
+				String status = rs.getString("th_status");
+				String link = rs.getString("th_link");
+				String comment = rs.getString("th_comment");
+				String remarks = rs.getString("th_remarks");
+				int number = rs.getInt("th_id");
+				Blob blob = rs.getBlob("th_image");
+				count++;
+				meeting.add(new AppointmentModel2(doctor, patient, date, time, status, link, comment, remarks, number,
+						blob));
+			}
+			if(count == 0) {
+				System.out.println("No values pulled from the database");
+				meeting.add(new AppointmentModel2("none", "none", "none", "none", "none", "none", "none", "none", 0,
+						null));				
+			}
 
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+
+		return meeting;
+	}
+	
+	@Override
+	public List<AppointmentModel> displaySchedule(String th_uid) throws SQLException {
+		List<AppointmentModel> schedule = new ArrayList<>();
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement preparedStatement;
+			preparedStatement = con.prepareStatement(SQL_SELECT_SCHEDULE);
+			preparedStatement.setString(1, th_uid);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("th_id");
+				String time = rs.getString("th_time");
+				String uid = rs.getString("th_uid");
+				String date = rs.getString("th_date");
+				String taken = rs.getString("th_taken");
+				
+		    	schedule.add(new AppointmentModel(id, date, time, uid, taken));
+
+			}
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+
+		return schedule;
+	}
+	
+	@Override
+	public List<AppointmentModel> displayTime(String th_uid, String th_date) throws SQLException {
+		List<AppointmentModel> schedule = new ArrayList<>();
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement preparedStatement;
+			preparedStatement = con.prepareStatement(SQL_SELECT_TIME);
+			preparedStatement.setString(1, th_uid);
+			preparedStatement.setString(2, th_date);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("th_id");
+				String date = rs.getString("th_date");
+				String time = rs.getString("th_time");
+				String uid = rs.getString("th_uid");
+				String taken = rs.getString("th_taken");
+		    	schedule.add(new AppointmentModel(id, date, time, uid, taken));
+
+			}
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+
+		return schedule;
+	}
+	
 	// Update Meeting
 	@Override
 	public boolean updateMeeting(int id, String link) throws SQLException {
@@ -103,7 +204,25 @@ public class AppDoctorImplementation extends SQLQuery implements AppDoctorInterf
 		}
 		return result;
 	}
-
+	
+	@Override
+	public boolean dropSchedule(int id) throws SQLException {
+		boolean result = false;
+		Connection con = null;
+		try {
+			con = DBConnection.connect();
+			PreparedStatement preparedStatement = con.prepareStatement(SQL_DROP_SCHEDULE);
+			preparedStatement.setFloat(1, id);
+			int num = preparedStatement.executeUpdate();
+			result = num > 0;
+		} catch (SQLException ex) {
+			DBConnection.printSQLException(ex);
+		} finally {
+			con.close();
+		}
+		return result;
+	}
+	
 	public void approveMeeting(int id, String type) throws SQLException {
 		String command = null;
 		Connection con = null;

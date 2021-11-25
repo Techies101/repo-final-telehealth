@@ -28,6 +28,14 @@ public interface AppDoctorInterface {
 
 	List<LabModel> labImageList(String uid) throws SQLException;
 
+	List<AppointmentModel> displaySchedule(String th_uid) throws SQLException;
+
+	List<AppointmentModel2> displayScheduleMeeting(String th_uid, String th_date) throws SQLException;
+
+	List<AppointmentModel> displayTime(String th_uid, String th_date) throws SQLException;
+
+	boolean dropSchedule(int id) throws SQLException;
+	
 	NotificationModel getSchedule(String th_did) throws SQLException, ParseException;
 
 }

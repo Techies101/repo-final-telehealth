@@ -5,13 +5,13 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="com.fujitsu.telehealth.utils.DBConnection"%>
 <%
     String id = request.getParameter("id");
     try {
     	
-        Connection con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/uIOZfQ2T0j?autoReconnect=true&serverTimezone=UTC&useSSL=False&allowPublicKeyRetrieval=true",
-				"uIOZfQ2T0j", "6y2fJmK9ND");
-        PreparedStatement ps = con.prepareStatement("select * from uIOZfQ2T0j.tbl_lab where th_id=?");
+        Connection con = DBConnection.connect();
+        PreparedStatement ps = con.prepareStatement("select * from tbl_lab where th_id=?");
         
         ps.setString(1, id);
         

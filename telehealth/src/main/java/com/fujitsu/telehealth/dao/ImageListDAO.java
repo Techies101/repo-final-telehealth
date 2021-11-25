@@ -31,6 +31,8 @@ public class ImageListDAO extends SQLQuery {
 				String uid = rs.getString("th_uid");
 				Blob blob = rs.getBlob("th_image");
 				lab.add(new LabModel(id, date, time, uid, blob));
+				System.out.println(blob);
+
 			}
 		} catch (SQLException ex) {
 			DBConnection.printSQLException(ex);

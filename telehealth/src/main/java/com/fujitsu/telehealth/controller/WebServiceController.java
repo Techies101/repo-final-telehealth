@@ -85,6 +85,9 @@ public class WebServiceController extends HttpServlet {
 			case "/doctor-dashboard":
 				DoctorController.displayMeeting(request, response);
 				break;
+			case "/doctor-schedule":
+				PatientController.displaySchedule(request, response);
+				break;
 				
 			// POST METHOD DOCTOR
 			case "/update-link":
@@ -101,6 +104,9 @@ public class WebServiceController extends HttpServlet {
 				break;
 			case "/listdoc":
 				PatientController.listDoctor(request, response);
+				break;
+			case "/listdocsched":
+				PatientController.listDoctorSchedule(request, response);
 				break;
 			case "/select":
 				PatientController.detailsPatient(request, response);
@@ -119,6 +125,12 @@ public class WebServiceController extends HttpServlet {
 				break;
 			case "/uploadImage":
 				PatientController.uploadImage(request, response);
+				break;
+			case "/addSchedule":
+				PatientController.addSchedule(request, response);
+				break;
+			case "/dropSchedule":
+				DoctorController.dropSchedule(request, response);
 				break;
 			default: 
 				PatientController.listRequest(request, response);

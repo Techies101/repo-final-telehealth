@@ -21,7 +21,7 @@
             </div>
             <br><br>
             <div class="row">
-            	<a href="https://getpaid.gcash.com/checkout/31556b99afca39a97c0522c138007a7e?testmode=true" target="_blank">
+            	<a href="https://getpaid.gcash.com/checkout/10f1958c888d9d9bc3d7a9d48f32ac25?testmode=true" target="_blank">
                 <div class="col-md-6 col-sm-12">
                   <div class="card dgm">
                     <img class="digital-method" src="./img/GCash-logo.jpg">

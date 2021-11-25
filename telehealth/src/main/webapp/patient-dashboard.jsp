@@ -11,11 +11,28 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
 	<link rel="stylesheet" href="assets/stylesheet/dashboard.css">
-	
+	<style>
+	.btn-danger{
+    	font-family: 'Montserrat' !important;
+    	margin-left: .5rem;
+}
+	</style>
 	
 <body>
-	
-	<%@include file="includes/_header.jsp"%>
+
+	<%
+		String uid = (String) session.getAttribute("uid");
+		
+		if (uid == null) {
+			response.sendRedirect("login");
+		}
+			
+		String role = (String) session.getAttribute("role");
+		
+			 if (role.equals("doctor")) 
+				response.sendRedirect("doctor-dashboard.jsp");
+	%>
+		<%@include file="includes/_header.jsp"%>
 
 			<div class="container col-lg-8 mt-3 ">
 				<form action="patient-dashboard" class="py-3 right" method="post">
@@ -71,11 +88,11 @@
 										<c:choose>
 										<c:when test="${a.meetingStatus == 'Pending' || a.meetingStatus == 'Payment'}">
 										<td class="d-flex flex-end">
-											<button id="cancel${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-times"></i> Cancel</button>
 										<c:if test="${a.meetingStatus == 'Payment'}">
 										<input type="button" onclick="location.href='payment.jsp';" class="btn btn-primary" value= "Pay"> 
 										<button id="view${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-eye"></i> View</button>					 	
 										<button id="upload${a.meetingNumber}" class="btn btn-primary"><i class="fa fa-upload"></i> Upload</button>
+
 									<!-- <form action="uploadImage" method="post" enctype="multipart/form-data">
 										
 										<input type="file" name="image" required="required"/><br/><br/>
@@ -83,6 +100,7 @@
 										<input type="submit"/>
 										</form>-->
 										</c:if>
+										<button id="cancel${a.meetingNumber}" class="btn btn-danger"><i class="fa fa-times"></i> Cancel</button>
 												<script>
 							
 													var a = document.getElementById('upload'+${a.meetingNumber});

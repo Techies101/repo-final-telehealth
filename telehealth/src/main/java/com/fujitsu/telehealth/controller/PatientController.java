@@ -165,6 +165,9 @@ public class PatientController {
 			if (AppPatientImpl.updateUserStatus(userEmail)) {
 				session.setAttribute("valid", "true");
 				session.invalidate();
+				response.sendRedirect("login.jsp");
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
+				//dispatcher.forward(request, response);
 			}
 		} else {
 			System.out.println("Invalid Token");
@@ -225,6 +228,8 @@ public class PatientController {
 		String th_password = request.getParameter("th_password");
 		String th_condition = request.getParameter("th_condition");
 		String th_bday = request.getParameter("th_bday");
+		
+		
 		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,
 				th_age, th_gender, th_contact, th_password, th_condition, th_bday);
 
@@ -243,13 +248,17 @@ public class PatientController {
 		HttpSession session = request.getSession();
 		String uid = (String) session.getAttribute("uid");
 		String fullname = (String) session.getAttribute("fullname");
-		String doctor = request.getParameter("doctor");
-		String date = request.getParameter("date");
+		String doctor = request.getParameter("docname");
+		String date = request.getParameter("datee");
 		String time = request.getParameter("time");
 		String condition = request.getParameter("condition");
-
-		AppRequestByPatient appRequest = new AppRequestByPatient(doctor, fullname, date, time, condition, uid);
-
+		
+		String did = request.getParameter("did");
+		AppRequestByPatient appRequest = new AppRequestByPatient(doctor, fullname, date, time, "Pending", condition, uid, did, "True");
+		
+		AppRequestByPatient appRequest2 = new AppRequestByPatient(date, time, uid, "True", doctor);
+		AppPatientImpl.requestTime(appRequest2);
+		
 		if (AppPatientImpl.requestAppointment(appRequest)) {
 			responseText(response, "success");
 		} else {
@@ -258,6 +267,26 @@ public class PatientController {
 
 	}
 
+	// Update Scheduled Time
+	public void requestTime(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		String date = request.getParameter("datee");
+		String time = request.getParameter("time");
+		String doctor = request.getParameter("docname");
+
+		AppRequestByPatient appRequest = new AppRequestByPatient(date, time, uid, "True", doctor);
+
+		if (AppPatientImpl.requestTime(appRequest)) {
+			responseText(response, "success");
+		} else {
+			responseText(response, "error");
+		}
+
+	}
+	
 	// List Request
 	public void listRequest(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
@@ -312,8 +341,30 @@ public class PatientController {
 	// List of Doctors for Request Appointment
 	public void listDoctor(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
+		List<AppointmentModel> schedule = null;
+		
+		HttpSession session = request.getSession();
+		String uid = null;
+		uid = (String) session.getAttribute("uid");
+
 		List<PatientModel> listPatient = AppDoctorImpl.selectAllPatients();
 		request.setAttribute("listPatient", listPatient);
+		schedule = AppDoctorImpl.displaySchedule(request.getParameter("uid"));
+		request.setAttribute("schedule", schedule);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	// List of Doctors for Request Appointment w/ Date & Time
+	public void listDoctorSchedule(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<AppointmentModel> schedule = null;
+				
+		//Schedule Table
+		schedule = AppDoctorImpl.displayTime(request.getParameter("did"), request.getParameter("date"));
+		request.setAttribute("schedule", schedule);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -395,4 +446,43 @@ public class PatientController {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	// Display Schedule
+	public void displaySchedule(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		List<AppointmentModel> schedule = null;
+		
+		HttpSession session = request.getSession();
+		String uid = null;
+		uid = (String) session.getAttribute("uid");
+				
+		schedule = AppDoctorImpl.displaySchedule(uid);
+		request.setAttribute("schedule", schedule);
+
+		// SEND DATA BACK TO JSP
+		dispatcher("doctor-schedule.jsp", request, response);
+		// response.sendRedirect("_patientappointment.jsp");
+	}
+	
+	// Request Appointment
+	public void addSchedule(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+
+		HttpSession session = request.getSession();
+		String uid = (String) session.getAttribute("uid");
+		String date = request.getParameter("date");
+		String time = request.getParameter("time");
+
+		AppRequestByPatient appRequest = new AppRequestByPatient(date, time, uid);
+
+		if (AppPatientImpl.addSchedule(appRequest)) {
+			responseText(response, "success");
+		} else {
+			responseText(response, "error");
+		}
+
+	}
+
 }
+

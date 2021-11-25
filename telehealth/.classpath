@@ -13,30 +13,12 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ReneL/git/repo-final-telehealth/telehealth/api/json-simple-2.3.0.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ReneL/git/repo-final-telehealth/telehealth/src/main/webapp/WEB-INF/lib/javax.activation-1.2.0.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ReneL/git/repo-final-telehealth/telehealth/src/main/webapp/WEB-INF/lib/javax.mail.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ReneL/git/repo-final-telehealth/telehealth/src/main/webapp/WEB-INF/lib/jsp-api-2.2.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ReneL/git/repo-final-telehealth/telehealth/src/main/webapp/WEB-INF/lib/jstl-1.2.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/ReinoAngeBi/Desktop/Telehealth(Reino)FINALNATALAGA/telehealth/src/main/webapp/WEB-INF/lib/javax.activation-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ReinoAngeBi/Desktop/Telehealth(Reino)FINALNATALAGA/telehealth/src/main/webapp/WEB-INF/lib/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ReinoAngeBi/Desktop/Telehealth(Reino)FINALNATALAGA/telehealth/src/main/webapp/WEB-INF/lib/json-simple-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ReinoAngeBi/Desktop/Telehealth(Reino)FINALNATALAGA/telehealth/src/main/webapp/WEB-INF/lib/jsp-api-2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ReinoAngeBi/Desktop/Telehealth(Reino)FINALNATALAGA/telehealth/src/main/webapp/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ReinoAngeBi/Desktop/Telehealth(Reino)FINALNATALAGA/telehealth/src/main/webapp/WEB-INF/lib/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/ReinoAngeBi/Desktop/Telehealth(Reino)FINALNATALAGA/telehealth/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.27.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

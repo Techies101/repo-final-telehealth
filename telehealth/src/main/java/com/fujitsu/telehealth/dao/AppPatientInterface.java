@@ -28,6 +28,8 @@ public interface AppPatientInterface {
 	List<AppointmentModel2> requestedAppointment(String th_uid) throws SQLException;
 	
 	List<AppointmentModel> selectLaboratory(String th_uid) throws SQLException;
+
+	boolean addSchedule(AppRequestByPatient requestInfo) throws SQLException;
 	
 	boolean updateUserStatus(String th_email) throws SQLException;
 }

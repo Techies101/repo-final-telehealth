@@ -14,8 +14,30 @@ public class AppointmentModel {
 	public String th_remarks;
 	public int th_id;
 	public String th_uid;
+	public String th_taken;
 	public Blob th_image;
 	
+	public AppointmentModel(int th_id, String th_date, String th_time, String th_uid, String th_taken) {
+		super();
+		this.th_id = th_id;
+		this.th_date = th_date;
+		this.th_time = th_time;
+		this.th_uid = th_uid;
+		this.th_taken = th_taken;
+	}
+	
+	public AppointmentModel(String th_date, String th_time, String th_uid) {
+		super();
+		this.th_date = th_date;
+		this.th_time = th_time;
+		this.th_uid = th_uid;
+	}
+	
+	public AppointmentModel(String th_time, String th_uid) {
+		super();
+		this.th_time = th_time;
+		this.th_uid = th_uid;
+	}
 	public AppointmentModel(String th_doctor, String th_patient, String th_date, String th_time, String th_status,
 			String th_link, String th_comment, String th_remarks, int th_id, String th_uid, Blob th_image) {
 		super();
@@ -48,6 +70,14 @@ public class AppointmentModel {
 	}
 
 
+
+	public String getTh_taken() {
+		return th_taken;
+	}
+
+	public void setTh_taken(String th_taken) {
+		this.th_taken = th_taken;
+	}
 
 	public String getTh_doctor() {
 		return th_doctor;

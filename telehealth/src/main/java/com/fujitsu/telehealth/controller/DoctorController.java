@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JsonObject;
-
 import com.fujitsu.telehealth.dao.AppDoctorImplementation;
 import com.fujitsu.telehealth.model.AppointmentModel2;
 import com.fujitsu.telehealth.model.NotificationModel;
@@ -22,7 +20,6 @@ public class DoctorController {
 
 	private AppDoctorImplementation appDao = new AppDoctorImplementation();
 
-	// Page Dispatchera
 	public void dispatcher(String page, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(page);
@@ -87,6 +84,22 @@ public class DoctorController {
 			dispatcher("doctor-dashboard.jsp", request, response);
 		} else {
 			System.out.println("Drop Meeting failed!");
+		}
+
+	}
+	
+	// Remove Scheduled Time
+	public void dropSchedule(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+
+		int id = Integer.parseInt(request.getParameter("drop"));
+System.out.println(id);
+		if (appDao.dropSchedule(id)) {
+			//String dropdown = request.getParameter("dropdown");
+			//request.setAttribute("dropdown", dropdown);
+			dispatcher("doctor-schedule.jsp", request, response);
+		} else {
+			System.out.println("Drop Schedule failed!");
 		}
 
 	}

@@ -11,7 +11,24 @@ public class AppRequestByPatient {
 	public String th_doctor_remarks;
 	public String th_patient_name;
 	public String th_uid;
+	public String th_did;
+	public String th_taken;
 
+	public AppRequestByPatient(String th_date, String th_time, String th_uid) {
+		super();
+		this.th_date = th_date;
+		this.th_time = th_time;
+		this.th_uid = th_uid;
+	}
+	public AppRequestByPatient(String th_date, String th_time, String th_uid, String th_taken, String th_doctor) {
+		super();
+		this.th_date = th_date;
+		this.th_time = th_time;
+		this.th_uid = th_uid;
+		this.th_taken = th_taken;
+		this.th_doctor = th_doctor;
+
+	}
 	public AppRequestByPatient(String th_doctor, String th_patient_name, String th_date, String th_time,
 			String th_comment, String th_uid) {
 		super();
@@ -21,6 +38,19 @@ public class AppRequestByPatient {
 		this.th_comment = th_comment;
 		this.th_patient_name = th_patient_name;
 		this.th_uid = th_uid;
+	}
+	
+	public AppRequestByPatient(String th_doctor, String th_patient_name, String th_date, String th_time, String th_status,
+			String th_comment, String th_uid, String th_did, String th_taken) {
+		super();
+		this.th_doctor = th_doctor;
+		this.th_date = th_date;
+		this.th_time = th_time;
+		this.th_comment = th_comment;
+		this.th_patient_name = th_patient_name;
+		this.th_uid = th_uid;
+		this.th_did = th_did;
+		this.th_taken = th_taken;
 	}
 
 	public AppRequestByPatient(String th_doctor, String th_date, String th_time, String th_status, String th_comment,
@@ -34,6 +64,19 @@ public class AppRequestByPatient {
 		this.th_doctor_remarks = th_doctor_remarks;
 	}
 
+	public String getTh_taken() {
+		return th_taken;
+	}
+	public void setTh_taken(String th_taken) {
+		this.th_taken = th_taken;
+	}
+	public String getTh_did() {
+		return th_did;
+	}
+	public void setTh_did(String th_did) {
+		this.th_did = th_did;
+	}
+	
 	public String getTh_link() {
 		return th_link;
 	}

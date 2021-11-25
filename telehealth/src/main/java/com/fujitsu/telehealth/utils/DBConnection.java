@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private static String dbURL = "jdbc:mysql://remotemysql.com:3306/uIOZfQ2T0j";
-	private static String dbUname = "uIOZfQ2T0j";
-	private static String dbPass = "6y2fJmK9ND";
+	private static String dbURL = "jdbc:mysql://localhost:3306/telehealth";
+	private static String dbUname = "root";
+	private static String dbPass = "Root";
 	private static String dbDriver = "com.mysql.cj.jdbc.Driver";
 	
 
