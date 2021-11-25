@@ -5,15 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-<<<<<<< HEAD
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-=======
-import java.text.ParseException;
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.fujitsu.telehealth.model.AppointmentModel;

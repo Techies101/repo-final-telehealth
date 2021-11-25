@@ -42,18 +42,29 @@
 		</ul>
 
 		<div class="col-md-3 text-end">
+		
 			<div class="row">
+			<div class="col mt-2"></div>
+			<div class="col mt-2">
+				<span>
+				<c:out value="${fullname}"> 
+				</c:out>
+				</span>
+			</div>
+				<form class="d-inline col" action="${uid == null ? 'login' : 'logout'}" method="POST" id="form-logout-login">
+				<button id="log-btn" type="submit" class="btn btn-login me-2">${uid != null ? "Logout" : "Login"}</button>
+				<div id="uid" data-uid="${uid}"></div>
+			</form>
+			</div>
+			
+			<!--  
 				<div class="col" align="right">
 					<button type="button" class="icon-button " align="right">
 						<span class="material-icons" style="margin-top: 5px;">
 							notifications </span> <span class="icon-button__badge" id="notif_number">2</span>
 					</button>
 				</div>
-			<form class="d-inline col" action="${uid == null ? 'login' : 'logout'}"
-				method="POST" id="form-logout-login">
-				<button id="log-btn" type="submit" class="btn btn-login me-2">${uid != null ? "Logout" : "Login"}</button>
-				<div id="uid" data-uid="${uid}"></div>
-			</form>
+				-->
 			</div>
 		</div>
 	</nav>

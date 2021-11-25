@@ -28,7 +28,6 @@ public interface AppDoctorInterface {
 
 	List<LabModel> labImageList(String uid) throws SQLException;
 
-<<<<<<< HEAD
 	List<AppointmentModel> displaySchedule(String th_uid) throws SQLException;
 
 	List<AppointmentModel2> displayScheduleMeeting(String th_uid, String th_date) throws SQLException;
@@ -37,8 +36,6 @@ public interface AppDoctorInterface {
 
 	boolean dropSchedule(int id) throws SQLException;
 	
-=======
 	NotificationModel getSchedule(String th_did) throws SQLException, ParseException;
 
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 }

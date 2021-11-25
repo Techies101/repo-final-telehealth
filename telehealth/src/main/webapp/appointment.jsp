@@ -64,14 +64,9 @@ type="text/css">
 								</script>
 								
 					    		</c:if>
-<<<<<<< HEAD
-					        
+    
 					    </c:forEach>	
-					    				
-=======
-					    </c:forEach>		
 					    			
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 					</select>
 							<input type="hidden" name="did" value="<%=request.getParameter("did")%>" />
 							<input type="hidden" name="datee" value="<%=request.getParameter("date")%>" />

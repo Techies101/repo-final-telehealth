@@ -10,7 +10,6 @@
 	<%@include file="includes/_linkshead.jsp"%>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/stylesheet/header.css">
-<<<<<<< HEAD
 
 <style>
 @import
@@ -55,39 +54,11 @@ height: 100vh !important;
 <%@include file="assets/stylesheet/main.css"%>
 </style>
 
-
-=======
 	<link rel="stylesheet" href="assets/stylesheet/dashboard.css">
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 </head>
 <body>
 
 	<%@include file="includes/_header.jsp"%>
-<<<<<<< HEAD
-	<div class="container-search ">
-
-	
-		<form action="doctor-dashboard" class="py-3 d-flex" method="post">
-		
-		<select name="dropdown" id="list" class="form-select mr-2">
-			<option value="All"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("All")) {%>
-				selected <%}%>>All</option>
-			<option value="Pending"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Pending")) {%>
-				selected <%}%>>Pending</option>
-			<option value="Payment"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Payment")) {%>
-				selected <%}%>>Payment</option>
-			<option value="Done"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Done")) {%>
-				selected <%}%>>Done</option>
-			<option value="Declined"
-				<%if ((request.getAttribute("dropdown") != null) && request.getAttribute("dropdown").equals("Declined")) {%>
-				selected <%}%>>Declined</option>
-		</select>
-		<button type="submit" class="btn btn-primary" ><i class="fa fa-search"></i> Search</button>
-=======
 	
 	<div class="container col-lg-8 mt-3 ">
 		<form action="patient-dashboard" class="py-3 right" method="post">
@@ -112,7 +83,6 @@ height: 100vh !important;
 			
 				<button type="submit" class="btn btn-primary col mt-1" ><i class="fa fa-search"></i> Search</button>
 			</div>
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 		</form>
 	</div>
 
@@ -120,6 +90,7 @@ height: 100vh !important;
 	<div class="container col-lg-8">
 		<div class="table-responsive w-100 ">
 			<table id="appointment" class="table table-hover">
+			
 				<thead>
 					<tr>
 						<th>Patient</th>
@@ -128,15 +99,8 @@ height: 100vh !important;
 						<th>Status</th>
 						<th>Action</th>
 					</tr>
-<<<<<<< HEAD
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table>
-</div>
-
-=======
 				</thead>
+				
 				<tbody>
 					<c:forEach var="a" items="${meeting}">
 						<c:if test="${dropdown == a.meetingStatus || dropdown == 'All'}">
@@ -332,6 +296,5 @@ height: 100vh !important;
 		</div>
 	</div>
 		
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 </body>
 </html>

@@ -165,6 +165,9 @@ public class PatientController {
 			if (AppPatientImpl.updateUserStatus(userEmail)) {
 				session.setAttribute("valid", "true");
 				session.invalidate();
+				response.sendRedirect("login.jsp");
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("appointment.jsp");
+				//dispatcher.forward(request, response);
 			}
 		} else {
 			System.out.println("Invalid Token");
@@ -225,6 +228,8 @@ public class PatientController {
 		String th_password = request.getParameter("th_password");
 		String th_condition = request.getParameter("th_condition");
 		String th_bday = request.getParameter("th_bday");
+		
+		
 		PatientModel userInfo = new PatientModel(th_uid, th_email, th_fname, th_middle_name, th_lname, th_address,
 				th_age, th_gender, th_contact, th_password, th_condition, th_bday);
 
@@ -247,18 +252,13 @@ public class PatientController {
 		String date = request.getParameter("datee");
 		String time = request.getParameter("time");
 		String condition = request.getParameter("condition");
-<<<<<<< HEAD
+		
 		String did = request.getParameter("did");
 		AppRequestByPatient appRequest = new AppRequestByPatient(doctor, fullname, date, time, "Pending", condition, uid, did, "True");
 		
 		AppRequestByPatient appRequest2 = new AppRequestByPatient(date, time, uid, "True", doctor);
 		AppPatientImpl.requestTime(appRequest2);
 		
-=======
-
-		AppRequestByPatient appRequest = new AppRequestByPatient(doctor, fullname, date, time, condition, uid);
-
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
 		if (AppPatientImpl.requestAppointment(appRequest)) {
 			responseText(response, "success");
 		} else {
@@ -446,7 +446,6 @@ public class PatientController {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("patient-list.jsp");
 		dispatcher.forward(request, response);
 	}
-<<<<<<< HEAD
 	
 	// Display Schedule
 	public void displaySchedule(HttpServletRequest request, HttpServletResponse response)
@@ -486,6 +485,4 @@ public class PatientController {
 	}
 
 }
-=======
-}
->>>>>>> branch 'reino2' of https://github.com/Techies101/repo-final-telehealth.git
+
